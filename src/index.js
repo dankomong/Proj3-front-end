@@ -10,6 +10,8 @@ class Level extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("bullet", "images/bullet.png");
+
     this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
 		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
 		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
@@ -39,14 +41,17 @@ class Level extends Phaser.Scene {
     this.createAnimations();
     this.levelSetup();
 
+    // bg3.width and height are coming from the camera.
+
     this.cameras.main.setBounds(0, 0, gameState.bg3.width, gameState.bg3.height);
     this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
+
 
     this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
     gameState.player.setCollideWorldBounds(true);
 
     this.physics.add.collider(gameState.player, gameState.platforms);
-    this.physics.add.collider(gameState.goal, gameState.platforms);
+    //this.physics.add.collider(gameState.goal, gameState.platforms);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -61,15 +66,14 @@ class Level extends Phaser.Scene {
 		}
 
     const bugGenLoop = this.time.addEvent({
-      delay: 500,
+      delay: 400,
       callback: bugGen,
       callbackScope: this,
       loop: true,
     });
 
     this.physics.add.collider(bugs, gameState.platforms, function (bug) {
-			bug.destroy();
-
+			bug.destroy()
 		})
 
     this.physics.add.collider(gameState.player, bugs, () => {
@@ -89,7 +93,7 @@ class Level extends Phaser.Scene {
     // Creates a platform evenly spaced along the two indices.
     // If either is not a number it won't make a platform
       if (typeof yIndex === 'number' && typeof xIndex === 'number') {
-        gameState.platforms.create((220 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
+        gameState.platforms.create((250 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
       }
   }
 
@@ -124,27 +128,27 @@ class Level extends Phaser.Scene {
   }
 
   createParallaxBackgrounds() {
-    gameState.bg1 = this.add.image(0, 0, 'bg1');
-    gameState.bg2 = this.add.image(0, 0, 'bg2');
+    // gameState.bg1 = this.add.image(0, 0, 'bg1');
+    // gameState.bg2 = this.add.image(0, 0, 'bg2');
     gameState.bg3 = this.add.image(0, 0, 'bg3');
 
-    gameState.bg1.setOrigin(0, 0);
-    gameState.bg2.setOrigin(0, 0);
+    // gameState.bg1.setOrigin(0, 0);
+    // gameState.bg2.setOrigin(0, 0);
     gameState.bg3.setOrigin(0, 0);
 
     const game_width = parseFloat(gameState.bg3.getBounds().width)
     gameState.width = game_width;
     const window_width = config.width
 
-    const bg1_width = gameState.bg1.getBounds().width
-    const bg2_width = gameState.bg2.getBounds().width
+    // const bg1_width = gameState.bg1.getBounds().width
+    // const bg2_width = gameState.bg2.getBounds().width
     const bg3_width = gameState.bg3.getBounds().width
-
-    if (gameState.bgColor) {
-    	gameState.bgColor .setScrollFactor(0);
-    }
-    gameState.bg1.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
-    gameState.bg2.setScrollFactor((bg2_width - window_width) / (game_width - window_width));
+    //
+    // if (gameState.bgColor) {
+    // 	gameState.bgColor .setScrollFactor(0);
+    // }
+    // gameState.bg1.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
+    // gameState.bg2.setScrollFactor((bg2_width - window_width) / (game_width - window_width));
   }
 
   levelSetup() {
@@ -152,22 +156,22 @@ class Level extends Phaser.Scene {
       this.createPlatform(xIndex, yIndex);
     }
 
-    gameState.goal = this.physics.add.sprite(gameState.width - 40, 100, 'campfire');
+    //gameState.goal = this.physics.add.sprite(gameState.width - 40, 100, 'campfire');
 
-    this.physics.add.overlap(gameState.player, gameState.goal, function() {
-      this.cameras.main.fade(800, 0, 0, 0, false, function(camera, progress) {
-        if (progress > .9) {
-          this.scene.stop(this.levelKey);
-          this.scene.start(this.nextLevel[this.levelKey]);
-        }
-      });
-    }, null, this);
+    // this.physics.add.overlap(gameState.player, gameState.goal, function() {
+    //   this.cameras.main.fade(800, 0, 0, 0, false, function(camera, progress) {
+    //     if (progress > .9) {
+    //       this.scene.stop(this.levelKey);
+    //       this.scene.start(this.nextLevel[this.levelKey]);
+    //     }
+    //   });
+    // }, null, this);
 
   }
 
   update() {
     if(gameState.active){
-      gameState.goal.anims.play('fire', true);
+      //gameState.goal.anims.play('fire', true);
       if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
         gameState.player.setVelocityX(gameState.speed);
@@ -215,8 +219,6 @@ class Level2 extends Level {
   constructor() {
     super('Level2')
     this.heights = [5, 4, null, 4, 6, 4, 6, 5, 5];
-    // Add Level2 weather here
-
   }
 }
 
