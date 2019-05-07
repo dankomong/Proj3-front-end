@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">CropKeepPos</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -233,7 +233,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/dead/armor__0022_dead_1.png</key>
+            <key type="filename">alien/dead/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -246,7 +246,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/dead/armor__0023_dead_2.png</key>
+            <key type="filename">alien/dead/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -259,7 +259,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/dead/armor__0024_dead_3.png</key>
+            <key type="filename">alien/dead/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -272,7 +272,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/dead/armor__0025_dead_4.png</key>
+            <key type="filename">alien/dead/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -285,7 +285,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/dead/armor__0026_dead_5.png</key>
+            <key type="filename">alien/dead/05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -298,7 +298,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0035_fire_1.png</key>
+            <key type="filename">alien/fire/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -311,7 +311,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0036_fire_2.png</key>
+            <key type="filename">alien/fire/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -324,7 +324,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0037_fire_3.png</key>
+            <key type="filename">alien/fire/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -337,7 +337,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0038_fire_4.png</key>
+            <key type="filename">alien/fire/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -350,7 +350,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0039_fire_5.png</key>
+            <key type="filename">alien/fire/05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -363,7 +363,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0040_fire_6.png</key>
+            <key type="filename">alien/fire/06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -376,7 +376,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0041_fire_7.png</key>
+            <key type="filename">alien/fire/07.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -389,7 +389,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0042_fire_8.png</key>
+            <key type="filename">alien/fire/08.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -402,7 +402,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0043_fire_9.png</key>
+            <key type="filename">alien/fire/09.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -415,7 +415,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0044_fire_10.png</key>
+            <key type="filename">alien/fire/10.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -428,7 +428,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/fire/armor__0045_fire_11.png</key>
+            <key type="filename">alien/fire/11.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -441,8 +441,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/hurt/armor__0018_hurt_1.png</key>
-            <key type="filename">alien/idle/armor__0000_idle_1.png</key>
+            <key type="filename">alien/hurt/01.png</key>
+            <key type="filename">alien/idle/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -455,7 +455,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/hurt/armor__0019_hurt_2.png</key>
+            <key type="filename">alien/hurt/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -468,7 +468,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/hurt/armor__0020_hurt_3.png</key>
+            <key type="filename">alien/hurt/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -481,7 +481,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/hurt/armor__0021_hurt_4.png</key>
+            <key type="filename">alien/hurt/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -494,7 +494,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/idle/armor__0001_idle_2.png</key>
+            <key type="filename">alien/idle/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -507,7 +507,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/idle/armor__0002_idle_3.png</key>
+            <key type="filename">alien/idle/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -520,7 +520,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/jump/armor__0027_jump_1.png</key>
+            <key type="filename">alien/jump/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -533,7 +533,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/jump/armor__0028_jump_2.png</key>
+            <key type="filename">alien/jump/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -546,7 +546,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/jump/armor__0028_jump_3.png</key>
+            <key type="filename">alien/jump/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -559,7 +559,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/jump/armor__0030_jump_4.png</key>
+            <key type="filename">alien/jump/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -572,7 +572,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0012_run_1.png</key>
+            <key type="filename">alien/run/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -585,7 +585,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0013_run_2.png</key>
+            <key type="filename">alien/run/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -598,7 +598,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0014_run_3.png</key>
+            <key type="filename">alien/run/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -611,7 +611,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0015_run_4.png</key>
+            <key type="filename">alien/run/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -624,7 +624,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0016_run_5.png</key>
+            <key type="filename">alien/run/05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -637,7 +637,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/run/armor__0017_run_6.png</key>
+            <key type="filename">alien/run/06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -650,7 +650,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/turn/armor__0003_turn_1.png</key>
+            <key type="filename">alien/turn/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -663,7 +663,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/turn/armor__0004_turn_2.png</key>
+            <key type="filename">alien/turn/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -676,7 +676,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/turn/armor__0005_turn_3.png</key>
+            <key type="filename">alien/turn/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -689,7 +689,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0006_walk_1.png</key>
+            <key type="filename">alien/walk/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -702,7 +702,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0007_walk_2.png</key>
+            <key type="filename">alien/walk/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -715,7 +715,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0008_walk_3.png</key>
+            <key type="filename">alien/walk/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -728,7 +728,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0009_walk_4.png</key>
+            <key type="filename">alien/walk/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -741,7 +741,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0010_walk_5.png</key>
+            <key type="filename">alien/walk/05.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -754,7 +754,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">alien/walk/armor__0011_walk_6.png</key>
+            <key type="filename">alien/walk/06.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

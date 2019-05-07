@@ -29,40 +29,24 @@ class GameScene extends Phaser.Scene {
 
     gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/armor__0000_idle_1').setScale(.8);
     gameState.player.setCollideWorldBounds(true);
-
+    gameState.player.setSize(62, 105, true);
+    gameState.player.setOffset(-10, 0);
+    // attack
     const attackFrames = this.anims.generateFrameNames('alien', {
                         start: 1, end: 4, zeroPad: 2,
                         prefix: 'attack/'
                     });
-    console.log(attackFrames)
     this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: -1 });
-    //
-    // gameState.player.anims.play('attack');
-
-    // this.anims.create({
-    //   key: 'float',
-    //   frames: this.anims.generateFrameNumbers('alien', { start: 9, end: 14 }),
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
-    //
-    // this.anims.create({
-    //   key: 'idle',
-    //   frames: this.anims.generateFrameNumbers('alien', { start: 3, end: 5 }),
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
-
-    // this.anims.create({
-    //   key: 'fire',
-    //   frames: this.anims.generateFrameNumbers('alien', { start: 5, end: 6 }),
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
-
-    // gameState.player.anims.play('idle', true);
-
-    // gameState.player.frame = 5
+    // walk
+    const walkFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
+    })
+    this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
+    // jump
+    const jumpFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
+    })
+    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
 
   }
 
@@ -97,11 +81,11 @@ class GameScene extends Phaser.Scene {
       if (gameState.cursors.up.isDown) {
         // gameState.player.setVelocity(250);
         gameState.player.setVelocityY(-300);
-        // gameState.player.anims.play('float', true);
+        gameState.player.anims.play('jump', true);
       }
       else if (gameState.cursors.right.isDown) {
         gameState.player.setVelocityX(200);
-        // gameState.player.anims.play('fire', true);
+        gameState.player.anims.play('fire', true);
       }
       else if (gameState.cursors.space.isDown) {
         console.log("attack!")
@@ -110,7 +94,7 @@ class GameScene extends Phaser.Scene {
       }
       else {
         gameState.player.setVelocityX(0);
-        gameState.player.anims.play('idle', true)
+        gameState.player.anims.play('walk', true)
       }
     }
   }

@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0045_fire_11",
+					"filename": "fire/11",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0044_fire_10",
+					"filename": "fire/10",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0043_fire_9",
+					"filename": "fire/09",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -115,7 +115,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0042_fire_8",
+					"filename": "fire/08",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -136,7 +136,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0041_fire_7",
+					"filename": "fire/07",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -157,7 +157,7 @@
 					}
 				},
 				{
-					"filename": "dead/armor__0022_dead_1",
+					"filename": "dead/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -178,7 +178,7 @@
 					}
 				},
 				{
-					"filename": "dead/armor__0023_dead_2",
+					"filename": "dead/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -199,7 +199,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0040_fire_6",
+					"filename": "fire/06",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -220,7 +220,7 @@
 					}
 				},
 				{
-					"filename": "jump/armor__0028_jump_3",
+					"filename": "jump/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -241,7 +241,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0037_fire_3",
+					"filename": "fire/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -262,7 +262,7 @@
 					}
 				},
 				{
-					"filename": "jump/armor__0030_jump_4",
+					"filename": "jump/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -304,7 +304,7 @@
 					}
 				},
 				{
-					"filename": "jump/armor__0027_jump_1",
+					"filename": "jump/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -346,7 +346,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0039_fire_5",
+					"filename": "fire/05",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -367,7 +367,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0036_fire_2",
+					"filename": "fire/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -388,7 +388,7 @@
 					}
 				},
 				{
-					"filename": "idle/armor__0002_idle_3",
+					"filename": "idle/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -409,7 +409,7 @@
 					}
 				},
 				{
-					"filename": "jump/armor__0028_jump_2",
+					"filename": "jump/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -430,7 +430,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0035_fire_1",
+					"filename": "fire/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -451,7 +451,7 @@
 					}
 				},
 				{
-					"filename": "idle/armor__0001_idle_2",
+					"filename": "idle/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -472,7 +472,7 @@
 					}
 				},
 				{
-					"filename": "hurt/armor__0019_hurt_2",
+					"filename": "hurt/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -493,7 +493,7 @@
 					}
 				},
 				{
-					"filename": "hurt/armor__0021_hurt_4",
+					"filename": "hurt/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -514,7 +514,7 @@
 					}
 				},
 				{
-					"filename": "dead/armor__0024_dead_3",
+					"filename": "dead/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -535,7 +535,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0013_run_2",
+					"filename": "run/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -556,7 +556,7 @@
 					}
 				},
 				{
-					"filename": "dead/armor__0026_dead_5",
+					"filename": "dead/05",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -577,7 +577,7 @@
 					}
 				},
 				{
-					"filename": "hurt/armor__0020_hurt_3",
+					"filename": "hurt/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -598,7 +598,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0017_run_6",
+					"filename": "run/06",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -619,7 +619,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0012_run_1",
+					"filename": "run/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -640,7 +640,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0008_walk_3",
+					"filename": "walk/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -661,7 +661,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0006_walk_1",
+					"filename": "walk/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -682,7 +682,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0010_walk_5",
+					"filename": "walk/05",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -703,7 +703,7 @@
 					}
 				},
 				{
-					"filename": "turn/armor__0003_turn_1",
+					"filename": "turn/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -724,7 +724,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0015_run_4",
+					"filename": "run/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -745,7 +745,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0007_walk_2",
+					"filename": "walk/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -766,7 +766,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0011_walk_6",
+					"filename": "walk/06",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -787,7 +787,7 @@
 					}
 				},
 				{
-					"filename": "dead/armor__0025_dead_4",
+					"filename": "dead/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -808,7 +808,7 @@
 					}
 				},
 				{
-					"filename": "hurt/armor__0018_hurt_1",
+					"filename": "hurt/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -829,7 +829,7 @@
 					}
 				},
 				{
-					"filename": "fire/armor__0038_fire_4",
+					"filename": "fire/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -850,7 +850,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0016_run_5",
+					"filename": "run/05",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -871,7 +871,7 @@
 					}
 				},
 				{
-					"filename": "turn/armor__0004_turn_2",
+					"filename": "turn/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -892,7 +892,7 @@
 					}
 				},
 				{
-					"filename": "idle/armor__0000_idle_1",
+					"filename": "idle/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -913,7 +913,7 @@
 					}
 				},
 				{
-					"filename": "run/armor__0014_run_3",
+					"filename": "run/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -934,7 +934,7 @@
 					}
 				},
 				{
-					"filename": "turn/armor__0005_turn_3",
+					"filename": "turn/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -955,7 +955,7 @@
 					}
 				},
 				{
-					"filename": "walk/armor__0009_walk_4",
+					"filename": "walk/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -981,6 +981,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:67a2f715d57fd9dc084cab587fa31d35:394ba452c358eebd680ffe6d442d721f:f5c2820dc1d6657fd77f91f373566390$"
+		"smartupdate": "$TexturePacker:SmartUpdate:073a9e5865dcca4722c52192c237bcc9:394ba452c358eebd680ffe6d442d721f:f5c2820dc1d6657fd77f91f373566390$"
 	}
 }
