@@ -30,14 +30,14 @@ class GameScene extends Phaser.Scene {
     gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/armor__0000_idle_1').setScale(.8);
     gameState.player.setCollideWorldBounds(true);
 
-    // const walkFrames = this.anims.generateFrameNames('alien', {
-    //                     start: 1, end: 6, zeroPad: 4,
-    //                     prefix: 'alien/walk/', suffix: '.png'
-    //                 });
+    const attackFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 4, zeroPad: 2,
+                        prefix: 'attack/'
+                    });
+    console.log(attackFrames)
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: -1 });
     //
-    // this.anims.create({ key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 });
-    //
-    // gameState.player.anims.play('walk');
+    // gameState.player.anims.play('attack');
 
     // this.anims.create({
     //   key: 'float',
@@ -103,9 +103,14 @@ class GameScene extends Phaser.Scene {
         gameState.player.setVelocityX(200);
         // gameState.player.anims.play('fire', true);
       }
+      else if (gameState.cursors.space.isDown) {
+        console.log("attack!")
+        gameState.player.x += 2;
+        gameState.player.anims.play('attack', true);
+      }
       else {
         gameState.player.setVelocityX(0);
-        // gameState.player.anims.play('idle', true)
+        gameState.player.anims.play('idle', true)
       }
     }
   }

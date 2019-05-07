@@ -10,7 +10,7 @@
 			"scale": 0.25,
 			"frames": [
 				{
-					"filename": "attack/armor__0034_attack_4",
+					"filename": "attack/04",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "attack/armor__0033_attack_3",
+					"filename": "attack/03",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -283,7 +283,7 @@
 					}
 				},
 				{
-					"filename": "attack/armor__0032_attack_2",
+					"filename": "attack/02",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "attack/armor__0031_attack_1",
+					"filename": "attack/01",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -981,6 +981,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:c18bcb200764cde65a2f1ce44c8e9755:394ba452c358eebd680ffe6d442d721f:f5c2820dc1d6657fd77f91f373566390$"
+		"smartupdate": "$TexturePacker:SmartUpdate:67a2f715d57fd9dc084cab587fa31d35:394ba452c358eebd680ffe6d442d721f:f5c2820dc1d6657fd77f91f373566390$"
 	}
 }
