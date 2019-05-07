@@ -1,103 +1,64 @@
-class Level extends Phaser.Scene {
-  constructor(key) {
-    super({key});
-    this.levelKey = key
-    this.nextLevel = {
-      'Level1': 'Level2',
-      'Level2': 'Level3',
-      'Level3': 'Level4',
-    }
+console.log('hello world')
+// img = document.createElement('img')
+// img.src = './assets/alien.png'
+// document.querySelector('body').appendChild(img)
+
+const gameState = {};
+
+class GameScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'GameScene' });
   }
 
   preload() {
-    this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
-    this.load.image('snowflake', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/snowflake.png');
-    this.load.spritesheet('campfire', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/campfire.png',
-      { frameWidth: 32, frameHeight: 32});
-    this.load.spritesheet('codey', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/codey.png', { frameWidth: 72, frameHeight: 90})
-
-    this.load.image('bg1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/mountain.png');
-    this.load.image('bg2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/trees.png');
-    this.load.image('bg3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/snowdunes.png');
+    this.load.image('bg', './assets/space1.png');
+    // this.load.image('bg', './assets/bkgd_0.png');
+    this.load.image('bg2', './assets/bkgd_1.png');
+    this.load.image('bg3', './assets/bkgd_4.png');
+    this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
   }
 
   create() {
-    gameState.active = true
-
-    // Create gameState.bgColor here!
-
+    gameState.active = true;
+    gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
+    gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
+    gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
     this.createParallaxBackgrounds();
 
-    gameState.player = this.physics.add.sprite(125, 110, 'codey').setScale(.5);
-
-    gameState.platforms = this.physics.add.staticGroup();
-
-    this.createAnimations();
-    this.levelSetup();
-
-    this.cameras.main.setBounds(0, 0, gameState.bg3.width, gameState.bg3.height);
-    this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
-
-    this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
-    gameState.player.setCollideWorldBounds(true);
-
-    this.physics.add.collider(gameState.player, gameState.platforms);
-    this.physics.add.collider(gameState.goal, gameState.platforms);
-
-    gameState.cursors = this.input.keyboard.createCursorKeys();
-
-    // creating enemies
-    const enemies = this.physics.add.group();
-    function bugGen () {
-      const yCoord = Math.random() * 450;
-      bugs.create(xCoord, 100, 'bug1');
-    }
-  }
-
-  createPlatform(xIndex, yIndex) {
-    // Creates a platform evenly spaced along the two indices.
-    // If either is not a number it won't make a platform
-      if (typeof yIndex === 'number' && typeof xIndex === 'number') {
-        gameState.platforms.create((220 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
-      }
-  }
-
-  createAnimations() {
+    gameState.player = this.physics.add.sprite(config.width / 2, 400, 'alien').setScale(.8);
     this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNumbers('codey', { start: 0, end: 3 }),
-      frameRate: 10,
+      key: 'float',
+      frames: this.anims.generateFrameNumbers('alien', { start: 9, end: 14 }),
+      frameRate: 5,
       repeat: -1
     });
 
     this.anims.create({
       key: 'idle',
-      frames: this.anims.generateFrameNumbers('codey', { start: 4, end: 5 }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('alien', { start: 3, end: 5 }),
+      frameRate: 5,
       repeat: -1
     });
 
-    this.anims.create({
-      key: 'jump',
-      frames: this.anims.generateFrameNumbers('codey', { start: 2, end: 3 }),
-      frameRate: 10,
-      repeat: -1
-    })
+    // this.anims.create({
+    //   key: 'fire',
+    //   frames: this.anims.generateFrameNumbers('alien', { start: 5, end: 6 }),
+    //   frameRate: 5,
+    //   repeat: -1
+    // });
 
-    this.anims.create({
-      key: 'fire',
-      frames: this.anims.generateFrameNumbers('campfire'),
-      frameRate: 10,
-      repeat: -1
-    })
+    gameState.player.anims.play('idle', true);
+    gameState.player.setCollideWorldBounds(true);
+    gameState.cursors = this.input.keyboard.createCursorKeys();
+    // gameState.player.frame = 5
+
   }
 
   createParallaxBackgrounds() {
-    gameState.bg1 = this.add.image(0, 0, 'bg1');
-    gameState.bg2 = this.add.image(0, 0, 'bg2');
-    gameState.bg3 = this.add.image(0, 0, 'bg3');
+    // Add in the three background images here and set their origin
 
-    gameState.bg1.setOrigin(0, 0);
+    gameState.bg.setDisplaySize(config.width, config.height);
+
     gameState.bg2.setOrigin(0, 0);
     gameState.bg3.setOrigin(0, 0);
 
@@ -105,149 +66,49 @@ class Level extends Phaser.Scene {
     gameState.width = game_width;
     const window_width = config.width
 
-    const bg1_width = gameState.bg1.getBounds().width
+    const bg1_width = gameState.bg.getBounds().width
     const bg2_width = gameState.bg2.getBounds().width
     const bg3_width = gameState.bg3.getBounds().width
 
-    if (gameState.bgColor) {
-    	gameState.bgColor .setScrollFactor(0);
-    }
-    gameState.bg1.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
-    gameState.bg2.setScrollFactor((bg2_width - window_width) / (game_width - window_width));
-  }
-
-  levelSetup() {
-    for (const [xIndex, yIndex] of this.heights.entries()) {
-      this.createPlatform(xIndex, yIndex);
-    }
-
-    gameState.goal = this.physics.add.sprite(gameState.width - 40, 100, 'campfire');
-
-    this.physics.add.overlap(gameState.player, gameState.goal, function() {
-      this.cameras.main.fade(800, 0, 0, 0, false, function(camera, progress) {
-        if (progress > .9) {
-          this.scene.stop(this.levelKey);
-          this.scene.start(this.nextLevel[this.levelKey]);
-        }
-      });
-    }, null, this);
-
-    this.setWeather(this.weather);
+    // Set the scroll factor for bg1, bg2, and bg3 here!
+    gameState.bg.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
+    gameState.bg2.setScrollFactor((bg2_width - window_width)/(game_width - window_width));
   }
 
   update() {
-    if(gameState.active){
-      gameState.goal.anims.play('fire', true);
-      if (gameState.cursors.right.isDown) {
-        gameState.player.flipX = false;
-        gameState.player.setVelocityX(gameState.speed);
-        gameState.player.anims.play('run', true);
-      } else if (gameState.cursors.left.isDown) {
-        gameState.player.flipX = true;
-        gameState.player.setVelocityX(-gameState.speed);
-        gameState.player.anims.play('run', true);
-      } else {
-        gameState.player.setVelocityX(0);
-        gameState.player.anims.play('idle', true);
-      }
+    // gameState.bg.tilePositionX -= 0.05;
+    gameState.bg2.tilePositionX += 5;
+    gameState.bg3.tilePositionX += 10;
 
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && gameState.player.body.touching.down) {
-        gameState.player.anims.play('jump', true);
-        gameState.player.setVelocityY(-500);
+    if (gameState.active) {
+      if (gameState.cursors.up.isDown) {
+        // gameState.player.setVelocity(250);
+        gameState.player.setVelocityY(-100);
+        gameState.player.anims.play('float', true);
       }
-
-      if (!gameState.player.body.touching.down){
-        gameState.player.anims.play('jump', true);
+      else if (gameState.cursors.space.isDown) {
+        // gameState.player.anims.play('fire', true);
       }
-
-      if (gameState.player.y > gameState.bg3.height) {
-        this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9) {
-            this.scene.restart(this.levelKey);
-          }
-        });
+      else {
+        gameState.player.anims.play('idle', true)
       }
     }
   }
-
-  setWeather(weather) {
-    const weathers = {
-      'morning': {
-        'bgColor': 0xF8c3aC,
-      },
-
-      'afternoon': {
-        'bgColor': 0x0571FF,
-      },
-
-      'twilight': {
-        'bgColor': 0x18235C,
-      },
-
-      'night': {
-        'bgColor': 0x000000,
-      },
-    }
-    if (weather) {
-      let { bgColor } = weathers[weather];
-      // Update gameState.bgColor.fillColor here!
-
-    }
-  }
 }
-
-class Level1 extends Level {
-  constructor() {
-    super('Level1')
-    this.heights = [4, 7, 5, null, 5, 4, null, 4, 4];
-    // Add Level1 weather here
-
-  }
-}
-
-class Level2 extends Level {
-  constructor() {
-    super('Level2')
-    this.heights = [5, 4, null, 4, 6, 4, 6, 5, 5];
-    // Add Level2 weather here
-
-  }
-}
-
-class Level3 extends Level {
-  constructor() {
-    super('Level3')
-    this.heights = [6, null, 6, 4, 6, 4, 5, null, 4];
-  }
-}
-
-class Level4 extends Level {
-  constructor() {
-    super('Level4')
-    this.heights = [4, null, 3, 6, null, 6, null, 5, 4];
-  }
-}
-
-const gameState = {
-  speed: 240,
-  ups: 380,
-};
 
 const config = {
-  type: Phaser.CANVAS,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  fps: {target: 60},
-  backgroundColor: "b9baff",
+  type: Phaser.AUTO,
+  width: window.innerWidth - 50,
+  height: window.innerHeight - 25,
+  backgroundColor: "0x18235C",
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 800 },
+      gravity: { y: 1000 },
       enableBody: true,
-
     }
   },
-  scene: [Level1, Level2, Level3, Level4]
+  scene: [GameScene]
 };
 
 const game = new Phaser.Game(config);
