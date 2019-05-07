@@ -27,7 +27,7 @@ class GameScene extends Phaser.Scene {
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
     this.createParallaxBackgrounds();
 
-    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/armor__0000_idle_1').setScale(.8);
+    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
     gameState.player.setCollideWorldBounds(true);
     gameState.player.setSize(62, 105, true);
     gameState.player.setOffset(-10, 0);
@@ -36,7 +36,20 @@ class GameScene extends Phaser.Scene {
                         start: 1, end: 4, zeroPad: 2,
                         prefix: 'attack/'
                     });
-    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: -1 });
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5 });
+    // attack option 2 --> 'draw' 'fire'
+    const drawFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 5, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'draw', frames: drawFrames, frameRate: 10, repeat: 0});
+
+    const fireFrames = this.anims.generateFrameNames('alien', {
+                        start: 6, end: 11, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'fire', frames: fireFrames, frameRate: 10, repeat: -1 });
+
     // walk
     const walkFrames = this.anims.generateFrameNames('alien', {
       start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
@@ -49,6 +62,8 @@ class GameScene extends Phaser.Scene {
     this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
 
   }
+
+
 
   createParallaxBackgrounds() {
     // Add in the three background images here and set their origin
@@ -85,12 +100,12 @@ class GameScene extends Phaser.Scene {
       }
       else if (gameState.cursors.right.isDown) {
         gameState.player.setVelocityX(200);
-        gameState.player.anims.play('fire', true);
+        gameState.player.anims.play('walk', true);
       }
       else if (gameState.cursors.space.isDown) {
-        console.log("attack!")
         gameState.player.x += 2;
-        gameState.player.anims.play('attack', true);
+        gameState.player.play('fire', true);
+        // gameState.player.anims.play('attack', true);
       }
       else {
         gameState.player.setVelocityX(0);
