@@ -11,8 +11,8 @@ class Level extends Phaser.Scene {
 
   preload() {
     this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
-		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
-		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
+    this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
+    this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
     this.load.image('snowflake', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/snowflake.png');
@@ -27,8 +27,6 @@ class Level extends Phaser.Scene {
 
   create() {
     gameState.active = true
-
-    // Create gameState.bgColor here!
 
     this.createParallaxBackgrounds();
 
@@ -49,40 +47,6 @@ class Level extends Phaser.Scene {
     this.physics.add.collider(gameState.goal, gameState.platforms);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
-
-    const bugs = this.physics.add.group();
-
-		const bugList = ['bug1', 'bug2', 'bug3']
-
-		const bugGen = () => {
-			const xCoord = Math.random() * window.innerWidth * 2
-			let randomBug = bugList[Math.floor(Math.random() * 3)]
-			bugs.create(xCoord, 10, randomBug)
-		}
-
-    const bugGenLoop = this.time.addEvent({
-      delay: 500,
-      callback: bugGen,
-      callbackScope: this,
-      loop: true,
-    });
-
-    this.physics.add.collider(bugs, gameState.platforms, function (bug) {
-			bug.destroy();
-
-		})
-
-    this.physics.add.collider(gameState.player, bugs, () => {
-			bugGenLoop.destroy();
-			this.physics.pause();
-			this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#000000' });
-			this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#000000' });
-
-			this.input.on('pointerup', () => {
-				gameState.score = 0;
-				this.scene.restart();
-			});
-		});
   }
 
   createPlatform(xIndex, yIndex) {
@@ -140,9 +104,7 @@ class Level extends Phaser.Scene {
     const bg2_width = gameState.bg2.getBounds().width
     const bg3_width = gameState.bg3.getBounds().width
 
-    if (gameState.bgColor) {
-    	gameState.bgColor .setScrollFactor(0);
-    }
+    // Set the scroll factor for bg1, bg2, and bg3 here!
     gameState.bg1.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
     gameState.bg2.setScrollFactor((bg2_width - window_width) / (game_width - window_width));
   }
@@ -152,6 +114,7 @@ class Level extends Phaser.Scene {
       this.createPlatform(xIndex, yIndex);
     }
 
+    // Create the campfire at the end of the level
     gameState.goal = this.physics.add.sprite(gameState.width - 40, 100, 'campfire');
 
     this.physics.add.overlap(gameState.player, gameState.goal, function() {
@@ -181,7 +144,7 @@ class Level extends Phaser.Scene {
         gameState.player.anims.play('idle', true);
       }
 
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && gameState.player.body.touching.down) {
         gameState.player.anims.play('jump', true);
         gameState.player.setVelocityY(-500);
       }
@@ -199,15 +162,12 @@ class Level extends Phaser.Scene {
       }
     }
   }
-
 }
 
 class Level1 extends Level {
   constructor() {
     super('Level1')
     this.heights = [4, 7, 5, null, 5, 4, null, 4, 4];
-    // Add Level1 weather here
-
   }
 }
 
@@ -215,8 +175,6 @@ class Level2 extends Level {
   constructor() {
     super('Level2')
     this.heights = [5, 4, null, 4, 6, 4, 6, 5, 5];
-    // Add Level2 weather here
-
   }
 }
 
@@ -248,7 +206,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 800 },
+      gravity: { x: 200 },
       enableBody: true,
 
     }
