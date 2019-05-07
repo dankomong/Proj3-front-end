@@ -15,30 +15,43 @@ class GameScene extends Phaser.Scene {
     // this.load.image('bg', './assets/bkgd_0.png');
     this.load.image('bg2', './assets/bkgd_1.png');
     this.load.image('bg3', './assets/bkgd_4.png');
-    this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+    this.load.multiatlas('alien', './assets/alien.json', 'assets');
   }
 
   create() {
     gameState.active = true;
+    gameState.cursors = this.input.keyboard.createCursorKeys();
+
     gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
     this.createParallaxBackgrounds();
 
-    gameState.player = this.physics.add.sprite(config.width / 2, 400, 'alien').setScale(.8);
-    this.anims.create({
-      key: 'float',
-      frames: this.anims.generateFrameNumbers('alien', { start: 9, end: 14 }),
-      frameRate: 5,
-      repeat: -1
-    });
+    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/armor__0000_idle_1').setScale(.8);
+    gameState.player.setCollideWorldBounds(true);
 
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('alien', { start: 3, end: 5 }),
-      frameRate: 5,
-      repeat: -1
-    });
+    // const walkFrames = this.anims.generateFrameNames('alien', {
+    //                     start: 1, end: 6, zeroPad: 4,
+    //                     prefix: 'alien/walk/', suffix: '.png'
+    //                 });
+    //
+    // this.anims.create({ key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 });
+    //
+    // gameState.player.anims.play('walk');
+
+    // this.anims.create({
+    //   key: 'float',
+    //   frames: this.anims.generateFrameNumbers('alien', { start: 9, end: 14 }),
+    //   frameRate: 5,
+    //   repeat: -1
+    // });
+    //
+    // this.anims.create({
+    //   key: 'idle',
+    //   frames: this.anims.generateFrameNumbers('alien', { start: 3, end: 5 }),
+    //   frameRate: 5,
+    //   repeat: -1
+    // });
 
     // this.anims.create({
     //   key: 'fire',
@@ -47,9 +60,8 @@ class GameScene extends Phaser.Scene {
     //   repeat: -1
     // });
 
-    gameState.player.anims.play('idle', true);
-    gameState.player.setCollideWorldBounds(true);
-    gameState.cursors = this.input.keyboard.createCursorKeys();
+    // gameState.player.anims.play('idle', true);
+
     // gameState.player.frame = 5
 
   }
@@ -79,18 +91,21 @@ class GameScene extends Phaser.Scene {
     // gameState.bg.tilePositionX -= 0.05;
     gameState.bg2.tilePositionX += 5;
     gameState.bg3.tilePositionX += 10;
+    gameState.player.x -= 2;
 
     if (gameState.active) {
       if (gameState.cursors.up.isDown) {
         // gameState.player.setVelocity(250);
-        gameState.player.setVelocityY(-100);
-        gameState.player.anims.play('float', true);
+        gameState.player.setVelocityY(-300);
+        // gameState.player.anims.play('float', true);
       }
-      else if (gameState.cursors.space.isDown) {
+      else if (gameState.cursors.right.isDown) {
+        gameState.player.setVelocityX(200);
         // gameState.player.anims.play('fire', true);
       }
       else {
-        gameState.player.anims.play('idle', true)
+        gameState.player.setVelocityX(0);
+        // gameState.player.anims.play('idle', true)
       }
     }
   }
@@ -98,14 +113,15 @@ class GameScene extends Phaser.Scene {
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth - 50,
+  width: window.innerWidth - 15,
   height: window.innerHeight - 25,
   backgroundColor: "0x18235C",
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 1000 },
+      gravity: { y: 1000},
       enableBody: true,
+      debug: true
     }
   },
   scene: [GameScene]

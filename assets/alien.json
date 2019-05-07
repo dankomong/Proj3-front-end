@@ -1,373 +1,226 @@
 {
 	"textures": [
 		{
-			"image": "alien-0.png",
+			"image": "alien.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1577,
-				"h": 116
+				"w": 507,
+				"h": 709
 			},
 			"scale": 0.25,
 			"frames": [
 				{
-					"filename": "armor__0000_idle_1.png",
+					"filename": "attack/armor__0034_attack_4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 53,
+						"w": 134,
 						"h": 107
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 53,
+						"w": 134,
 						"h": 107
 					},
 					"frame": {
 						"x": 0,
 						"y": 0,
-						"w": 53,
+						"w": 134,
 						"h": 107
 					}
 				},
 				{
-					"filename": "armor__0001_idle_2.png",
+					"filename": "fire/armor__0045_fire_11",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 56,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 56,
-						"h": 110
-					},
-					"frame": {
-						"x": 83,
-						"y": 0,
-						"w": 56,
-						"h": 110
-					}
-				},
-				{
-					"filename": "armor__0002_idle_3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 59,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 59,
-						"h": 110
-					},
-					"frame": {
-						"x": 166,
-						"y": 0,
-						"w": 59,
-						"h": 110
-					}
-				},
-				{
-					"filename": "armor__0006_walk_1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 48,
-						"h": 109
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 48,
-						"h": 109
-					},
-					"frame": {
-						"x": 249,
-						"y": 0,
-						"w": 48,
-						"h": 109
-					}
-				},
-				{
-					"filename": "armor__0007_walk_2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 50,
-						"h": 111
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 50,
-						"h": 111
-					},
-					"frame": {
-						"x": 332,
-						"y": 0,
-						"w": 50,
-						"h": 111
-					}
-				},
-				{
-					"filename": "armor__0008_walk_3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 48,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 48,
-						"h": 110
-					},
-					"frame": {
-						"x": 415,
-						"y": 0,
-						"w": 48,
-						"h": 110
-					}
-				},
-				{
-					"filename": "armor__0009_walk_4.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 45,
+						"w": 122,
 						"h": 108
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 45,
+						"w": 122,
 						"h": 108
 					},
 					"frame": {
-						"x": 498,
-						"y": 0,
-						"w": 45,
+						"x": 0,
+						"y": 107,
+						"w": 122,
 						"h": 108
 					}
 				},
 				{
-					"filename": "armor__0010_walk_5.png",
+					"filename": "fire/armor__0044_fire_10",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 46,
-						"h": 109
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 46,
-						"h": 109
-					},
-					"frame": {
-						"x": 581,
-						"y": 0,
-						"w": 46,
-						"h": 109
-					}
-				},
-				{
-					"filename": "armor__0011_walk_6.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 44,
-						"h": 109
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 44,
-						"h": 109
-					},
-					"frame": {
-						"x": 664,
-						"y": 0,
-						"w": 44,
-						"h": 109
-					}
-				},
-				{
-					"filename": "armor__0012_run_1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 49,
-						"h": 109
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 49,
-						"h": 109
-					},
-					"frame": {
-						"x": 747,
-						"y": 0,
-						"w": 49,
-						"h": 109
-					}
-				},
-				{
-					"filename": "armor__0013_run_2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 49,
-						"h": 110
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 49,
-						"h": 110
-					},
-					"frame": {
-						"x": 830,
-						"y": 0,
-						"w": 49,
-						"h": 110
-					}
-				},
-				{
-					"filename": "armor__0014_run_3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 54,
-						"h": 106
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 54,
-						"h": 106
-					},
-					"frame": {
-						"x": 913,
-						"y": 0,
-						"w": 54,
-						"h": 106
-					}
-				},
-				{
-					"filename": "armor__0015_run_4.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 44,
-						"h": 109
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 44,
-						"h": 109
-					},
-					"frame": {
-						"x": 996,
-						"y": 0,
-						"w": 44,
-						"h": 109
-					}
-				},
-				{
-					"filename": "armor__0016_run_5.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 51,
+						"w": 119,
 						"h": 108
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 51,
+						"w": 119,
 						"h": 108
 					},
 					"frame": {
-						"x": 1079,
-						"y": 0,
-						"w": 51,
+						"x": 0,
+						"y": 215,
+						"w": 119,
 						"h": 108
 					}
 				},
 				{
-					"filename": "armor__0017_run_6.png",
+					"filename": "fire/armor__0043_fire_9",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 55,
+						"w": 114,
 						"h": 108
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 55,
+						"w": 114,
 						"h": 108
 					},
 					"frame": {
-						"x": 1162,
-						"y": 0,
-						"w": 55,
+						"x": 0,
+						"y": 323,
+						"w": 114,
 						"h": 108
 					}
 				},
 				{
-					"filename": "armor__0027_jump_1.png",
+					"filename": "attack/armor__0033_attack_3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 67,
+						"w": 108,
 						"h": 107
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 67,
+						"w": 108,
 						"h": 107
 					},
 					"frame": {
-						"x": 1245,
+						"x": 134,
 						"y": 0,
-						"w": 67,
+						"w": 108,
 						"h": 107
 					}
 				},
 				{
-					"filename": "armor__0028_jump_2.png",
+					"filename": "fire/armor__0042_fire_8",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 59,
-						"h": 115
+						"w": 94,
+						"h": 108
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 59,
-						"h": 115
+						"w": 94,
+						"h": 108
 					},
 					"frame": {
-						"x": 1328,
-						"y": 0,
-						"w": 59,
-						"h": 115
+						"x": 122,
+						"y": 107,
+						"w": 94,
+						"h": 108
 					}
 				},
 				{
-					"filename": "armor__0028_jump_3.png",
+					"filename": "fire/armor__0041_fire_7",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 89,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 89,
+						"h": 108
+					},
+					"frame": {
+						"x": 119,
+						"y": 215,
+						"w": 89,
+						"h": 108
+					}
+				},
+				{
+					"filename": "dead/armor__0022_dead_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 87,
+						"h": 103
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 87,
+						"h": 103
+					},
+					"frame": {
+						"x": 0,
+						"y": 431,
+						"w": 87,
+						"h": 103
+					}
+				},
+				{
+					"filename": "dead/armor__0023_dead_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 103,
+						"h": 82
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 103,
+						"h": 82
+					},
+					"frame": {
+						"x": 242,
+						"y": 0,
+						"w": 103,
+						"h": 82
+					}
+				},
+				{
+					"filename": "fire/armor__0040_fire_6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 77,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 77,
+						"h": 108
+					},
+					"frame": {
+						"x": 114,
+						"y": 323,
+						"w": 77,
+						"h": 108
+					}
+				},
+				{
+					"filename": "jump/armor__0028_jump_3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -381,14 +234,35 @@
 						"h": 116
 					},
 					"frame": {
-						"x": 1411,
-						"y": 0,
+						"x": 0,
+						"y": 534,
 						"w": 66,
 						"h": 116
 					}
 				},
 				{
-					"filename": "armor__0030_jump_4.png",
+					"filename": "fire/armor__0037_fire_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 75,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 75,
+						"h": 105
+					},
+					"frame": {
+						"x": 87,
+						"y": 431,
+						"w": 75,
+						"h": 105
+					}
+				},
+				{
+					"filename": "jump/armor__0030_jump_4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -402,10 +276,703 @@
 						"h": 93
 					},
 					"frame": {
-						"x": 1494,
+						"x": 345,
 						"y": 0,
 						"w": 83,
 						"h": 93
+					}
+				},
+				{
+					"filename": "attack/armor__0032_attack_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 70,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 70,
+						"h": 107
+					},
+					"frame": {
+						"x": 428,
+						"y": 0,
+						"w": 70,
+						"h": 107
+					}
+				},
+				{
+					"filename": "jump/armor__0027_jump_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 67,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 67,
+						"h": 107
+					},
+					"frame": {
+						"x": 66,
+						"y": 536,
+						"w": 67,
+						"h": 107
+					}
+				},
+				{
+					"filename": "attack/armor__0031_attack_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 56,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 56,
+						"h": 107
+					},
+					"frame": {
+						"x": 133,
+						"y": 536,
+						"w": 56,
+						"h": 107
+					}
+				},
+				{
+					"filename": "fire/armor__0039_fire_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 58,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 58,
+						"h": 110
+					},
+					"frame": {
+						"x": 216,
+						"y": 107,
+						"w": 58,
+						"h": 110
+					}
+				},
+				{
+					"filename": "fire/armor__0036_fire_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 61,
+						"h": 106
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 61,
+						"h": 106
+					},
+					"frame": {
+						"x": 208,
+						"y": 217,
+						"w": 61,
+						"h": 106
+					}
+				},
+				{
+					"filename": "idle/armor__0002_idle_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 59,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 59,
+						"h": 110
+					},
+					"frame": {
+						"x": 191,
+						"y": 323,
+						"w": 59,
+						"h": 110
+					}
+				},
+				{
+					"filename": "jump/armor__0028_jump_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 59,
+						"h": 115
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 59,
+						"h": 115
+					},
+					"frame": {
+						"x": 274,
+						"y": 82,
+						"w": 59,
+						"h": 115
+					}
+				},
+				{
+					"filename": "fire/armor__0035_fire_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 57,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 57,
+						"h": 107
+					},
+					"frame": {
+						"x": 333,
+						"y": 93,
+						"w": 57,
+						"h": 107
+					}
+				},
+				{
+					"filename": "idle/armor__0001_idle_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 56,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 56,
+						"h": 110
+					},
+					"frame": {
+						"x": 250,
+						"y": 323,
+						"w": 56,
+						"h": 110
+					}
+				},
+				{
+					"filename": "hurt/armor__0019_hurt_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 106
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 106
+					},
+					"frame": {
+						"x": 269,
+						"y": 217,
+						"w": 51,
+						"h": 106
+					}
+				},
+				{
+					"filename": "hurt/armor__0021_hurt_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 56,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 56,
+						"h": 108
+					},
+					"frame": {
+						"x": 320,
+						"y": 200,
+						"w": 56,
+						"h": 108
+					}
+				},
+				{
+					"filename": "dead/armor__0024_dead_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 97,
+						"h": 60
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 97,
+						"h": 60
+					},
+					"frame": {
+						"x": 162,
+						"y": 433,
+						"w": 97,
+						"h": 60
+					}
+				},
+				{
+					"filename": "run/armor__0013_run_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 49,
+						"h": 110
+					},
+					"frame": {
+						"x": 306,
+						"y": 323,
+						"w": 49,
+						"h": 110
+					}
+				},
+				{
+					"filename": "dead/armor__0026_dead_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 102,
+						"h": 53
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 102,
+						"h": 53
+					},
+					"frame": {
+						"x": 259,
+						"y": 433,
+						"w": 102,
+						"h": 53
+					}
+				},
+				{
+					"filename": "hurt/armor__0020_hurt_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 55,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 55,
+						"h": 108
+					},
+					"frame": {
+						"x": 376,
+						"y": 200,
+						"w": 55,
+						"h": 108
+					}
+				},
+				{
+					"filename": "run/armor__0017_run_6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 55,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 55,
+						"h": 108
+					},
+					"frame": {
+						"x": 355,
+						"y": 308,
+						"w": 55,
+						"h": 108
+					}
+				},
+				{
+					"filename": "run/armor__0012_run_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 49,
+						"h": 109
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 49,
+						"h": 109
+					},
+					"frame": {
+						"x": 410,
+						"y": 308,
+						"w": 49,
+						"h": 109
+					}
+				},
+				{
+					"filename": "walk/armor__0008_walk_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 110
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 110
+					},
+					"frame": {
+						"x": 459,
+						"y": 107,
+						"w": 48,
+						"h": 110
+					}
+				},
+				{
+					"filename": "walk/armor__0006_walk_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 48,
+						"h": 109
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 48,
+						"h": 109
+					},
+					"frame": {
+						"x": 459,
+						"y": 217,
+						"w": 48,
+						"h": 109
+					}
+				},
+				{
+					"filename": "walk/armor__0010_walk_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 46,
+						"h": 109
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 46,
+						"h": 109
+					},
+					"frame": {
+						"x": 459,
+						"y": 326,
+						"w": 46,
+						"h": 109
+					}
+				},
+				{
+					"filename": "turn/armor__0003_turn_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 53,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 108
+					},
+					"frame": {
+						"x": 189,
+						"y": 493,
+						"w": 53,
+						"h": 108
+					}
+				},
+				{
+					"filename": "run/armor__0015_run_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 109
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 109
+					},
+					"frame": {
+						"x": 242,
+						"y": 493,
+						"w": 44,
+						"h": 109
+					}
+				},
+				{
+					"filename": "walk/armor__0007_walk_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 111
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 111
+					},
+					"frame": {
+						"x": 286,
+						"y": 486,
+						"w": 50,
+						"h": 111
+					}
+				},
+				{
+					"filename": "walk/armor__0011_walk_6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 109
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 109
+					},
+					"frame": {
+						"x": 336,
+						"y": 486,
+						"w": 44,
+						"h": 109
+					}
+				},
+				{
+					"filename": "dead/armor__0025_dead_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 102,
+						"h": 47
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 102,
+						"h": 47
+					},
+					"frame": {
+						"x": 0,
+						"y": 650,
+						"w": 102,
+						"h": 47
+					}
+				},
+				{
+					"filename": "hurt/armor__0018_hurt_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 53,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 107
+					},
+					"frame": {
+						"x": 189,
+						"y": 601,
+						"w": 53,
+						"h": 107
+					}
+				},
+				{
+					"filename": "fire/armor__0038_fire_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 50,
+						"h": 107
+					},
+					"frame": {
+						"x": 242,
+						"y": 602,
+						"w": 50,
+						"h": 107
+					}
+				},
+				{
+					"filename": "run/armor__0016_run_5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 108
+					},
+					"frame": {
+						"x": 292,
+						"y": 597,
+						"w": 51,
+						"h": 108
+					}
+				},
+				{
+					"filename": "turn/armor__0004_turn_2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 108
+					},
+					"frame": {
+						"x": 343,
+						"y": 595,
+						"w": 51,
+						"h": 108
+					}
+				},
+				{
+					"filename": "idle/armor__0000_idle_1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 53,
+						"h": 107
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 107
+					},
+					"frame": {
+						"x": 380,
+						"y": 417,
+						"w": 53,
+						"h": 107
+					}
+				},
+				{
+					"filename": "run/armor__0014_run_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 54,
+						"h": 106
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 54,
+						"h": 106
+					},
+					"frame": {
+						"x": 433,
+						"y": 435,
+						"w": 54,
+						"h": 106
+					}
+				},
+				{
+					"filename": "turn/armor__0005_turn_3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 108
+					},
+					"frame": {
+						"x": 394,
+						"y": 541,
+						"w": 51,
+						"h": 108
+					}
+				},
+				{
+					"filename": "walk/armor__0009_walk_4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 45,
+						"h": 108
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 45,
+						"h": 108
+					},
+					"frame": {
+						"x": 445,
+						"y": 541,
+						"w": 45,
+						"h": 108
 					}
 				}
 			]
@@ -414,6 +981,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:4b3712e9f0fdda7be16295c1e071384b:a87bd62ac27d9b9bdd97a3058ac59146:ca02665855e9150527d47ad85bf293c8$"
+		"smartupdate": "$TexturePacker:SmartUpdate:c18bcb200764cde65a2f1ce44c8e9755:394ba452c358eebd680ffe6d442d721f:f5c2820dc1d6657fd77f91f373566390$"
 	}
 }
