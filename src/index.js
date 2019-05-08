@@ -57,26 +57,25 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, gameState.platforms);
 
-    this.anims.create({
-      key: 'float',
-      frames: this.anims.generateFrameNumbers('alien', { start: 9, end: 14 }),
-      frameRate: 5,
-      repeat: -1
-    });
+    // animations
+    // attack
+    const attackFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 4, zeroPad: 2,
+                        prefix: 'attack/'
+                    });
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5 });
+    // walk
+    const walkFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
+    })
+    this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
+    // jump
+    const jumpFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
+    })
+    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
 
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('alien', { start: 3, end: 5 }),
-      frameRate: 5,
-      repeat: -1
-    });
-
-    // this.anims.create({
-    //   key: 'fire',
-    //   frames: this.anims.generateFrameNumbers('alien', { start: 5, end: 6 }),
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
+    // bugs
 
     const bugs = this.physics.add.group();
 
@@ -127,7 +126,7 @@ class GameScene extends Phaser.Scene {
             Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
 
             this.speed = Phaser.Math.GetSpeed(400, 1);
-            
+
         },
 
         fire: function (x, y)
@@ -216,14 +215,14 @@ class GameScene extends Phaser.Scene {
         gameState.player.setVelocityX(-200);
       }
       else {
-        gameState.player.anims.play('idle', true)
+        gameState.player.anims.play('walk', true)
         gameState.player.setVelocityX(0);
       }
 
       if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
         // gameState.player.setVelocity(250);
         gameState.player.setVelocityY(-500);
-        gameState.player.anims.play('float', true);
+        gameState.player.anims.play('jump', true);
       }
 
 
