@@ -116,18 +116,19 @@ class GameScene extends Phaser.Scene {
     gameState.cursors = this.input.keyboard.createCursorKeys();
     // gameState.player.frame = 5
 
+    // new phaser class for bullet;
     var Bullet = new Phaser.Class({
 
         Extends: Phaser.GameObjects.Image,
 
         initialize:
 
-        function Bullet (scene)
+        function Bullet(scene)
         {
             Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
 
             this.speed = Phaser.Math.GetSpeed(400, 1);
-            
+
         },
 
         fire: function (x, y)
@@ -141,7 +142,8 @@ class GameScene extends Phaser.Scene {
         {
             this.x += this.speed * delta;
 
-            if (this.x > 820)
+            // how far the bullet travels on the screen
+            if (this.x > 2020)
             {
                 this.setActive(false);
                 this.setVisible(false);
@@ -161,6 +163,10 @@ class GameScene extends Phaser.Scene {
 
     //  Create the objects in advance, so they're ready and waiting in the pool
     bullets.create(20);
+
+    this.physics.add.collider(bullets, bug, function (bug) {
+      bug.destroy()
+    })
 
     cursors = this.input.keyboard.createCursorKeys();
 
