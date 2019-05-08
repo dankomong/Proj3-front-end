@@ -30,20 +30,26 @@ class GameScene extends Phaser.Scene {
 		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
-    this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+    // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
     this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
+    this.load.multiatlas('alien', './assets/alien.json', 'assets');
   }
 
   create() {
     gameState.active = true;
     gameState.platforms = this.physics.add.staticGroup();
+    gameState.cursors = this.input.keyboard.createCursorKeys();
 
     gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
     this.createParallaxBackgrounds();
+    this.createAnimations();
 
-    gameState.player = this.physics.add.sprite(50, 100, 'alien').setScale(.8);
+    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
+    gameState.player.setCollideWorldBounds(true);
+    gameState.player.setSize(62, 105, true);
+    gameState.player.setOffset(-10, 0);
 
     for (const [xIndex, yIndex] of this.heights.entries()) {
       this.createPlatform(xIndex, yIndex);
@@ -57,23 +63,6 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, gameState.platforms);
 
-    // animations
-    // attack
-    const attackFrames = this.anims.generateFrameNames('alien', {
-                        start: 1, end: 4, zeroPad: 2,
-                        prefix: 'attack/'
-                    });
-    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5 });
-    // walk
-    const walkFrames = this.anims.generateFrameNames('alien', {
-      start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
-    })
-    this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
-    // jump
-    const jumpFrames = this.anims.generateFrameNames('alien', {
-      start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
-    })
-    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
 
     // bugs
 
@@ -110,9 +99,7 @@ class GameScene extends Phaser.Scene {
       });
     });
 
-    gameState.player.anims.play('idle', true);
-    gameState.player.setCollideWorldBounds(true);
-    gameState.cursors = this.input.keyboard.createCursorKeys();
+
     // gameState.player.frame = 5
 
     var Bullet = new Phaser.Class({
@@ -174,6 +161,42 @@ class GameScene extends Phaser.Scene {
     }
   }
 
+  createAnimations() {
+
+    // attack
+    const attackFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 4, zeroPad: 2,
+                        prefix: 'attack/'
+                    });
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5 });
+    // attack option 2 --> 'draw' 'fire'
+    const drawFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 5, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'draw', frames: drawFrames, frameRate: 10, repeat: 0});
+
+    const fireFrames = this.anims.generateFrameNames('alien', {
+                        start: 6, end: 11, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'fire', frames: fireFrames, frameRate: 10, repeat: -1 });
+
+    // walk
+    const walkFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
+    })
+    this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
+    // jump
+    const jumpFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
+    })
+    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
+
+  }
+
+
+
   createParallaxBackgrounds() {
     // Add in the three background images here and set their origin
 
@@ -197,13 +220,14 @@ class GameScene extends Phaser.Scene {
 
   update(time, delta) {
     // gameState.bg.tilePositionX -= 0.05;
-    // gameState.bg2.tilePositionX += 5;
-    // gameState.bg3.tilePositionX += 10;
+    gameState.bg2.tilePositionX += 5;
+    gameState.bg3.tilePositionX += 10;
     // if (game.input.activePointer.isDown) {
     //     fire();
     //  }
 
     if (gameState.active) {
+      gameState.player.anims.play('walk', true);
       if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
         // gameState.player.anims.play('fire', true);
@@ -254,7 +278,7 @@ class GameScene extends Phaser.Scene {
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth - 50,
+  width: window.innerWidth - 15,
   height: window.innerHeight - 25,
   backgroundColor: "0x18235C",
   physics: {
