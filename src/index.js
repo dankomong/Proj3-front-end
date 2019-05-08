@@ -37,7 +37,8 @@ class GameScene extends Phaser.Scene {
 
   create() {
     gameState.active = true;
-    gameState.platforms = this.physics.add.staticGroup();
+    // gameState.platforms = this.physics.add.group();
+    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -45,18 +46,29 @@ class GameScene extends Phaser.Scene {
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
 
+    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
+
+
+    // this.createPlatforms();
+    gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
+    gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
+    gameState.platform3 = this.physics.add.sprite(2 * config.width, 300, 'platform');
+    const platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
+    platforms.forEach(platform => {
+      platform.body.allowGravity = false;
+      platform.body.immovable = true;
+      platform.setVelocityX(-100);
+
+      this.physics.add.collider(gameState.player, platform);
+    })
 
 
     this.createAnimations();
 
-    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
+
     gameState.player.setCollideWorldBounds(true);
     gameState.player.setSize(62, 105, true);
     gameState.player.setOffset(-10, 0);
-
-    for (const [xIndex, yIndex] of this.heights.entries()) {
-      this.createPlatform(xIndex, yIndex);
-    }
 
     this.cameras.main.setBounds(0, 0, gameState.bg.width, gameState.bg.height);
     this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
@@ -64,7 +76,6 @@ class GameScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
 
-    this.physics.add.collider(gameState.player, gameState.platforms);
 
 
     // bugs
@@ -157,23 +168,19 @@ class GameScene extends Phaser.Scene {
 
     speed = Phaser.Math.GetSpeed(300, 1);
 
-    gameState.platforms.move = this.tweens.add({
-      targets: gameState.platforms,
-      x: 320,
-      ease: 'Linear',
-      duration: 1800,
-      repeat: -1
-    })
+    // gameState.platforms.move = this.tweens.add({
+    //   targets: gameState.platforms,
+    //   x: 320,
+    //   ease: 'Linear',
+    //   duration: 1800,
+    //   repeat: -1
+    // })
   }
 
+  createPlatforms() {
 
-  createPlatform(xIndex, yIndex) {
-    // Creates a platform evenly spaced along the two indices.
-    // If either is not a number it won't make a platform
-    if (typeof yIndex === 'number' && typeof xIndex === 'number') {
-      gameState.platforms.create((250 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
-    }
   }
+
 
   createAnimations() {
 
@@ -214,13 +221,16 @@ class GameScene extends Phaser.Scene {
 
   }
 
+  createPlatforms() {
+
+  }
+
 
   update(time, delta) {
 
-
     gameState.bg2.tilePositionX += 5;
     gameState.bg3.tilePositionX += 10;
-    gameState.platforms.x -= 1
+    // gameState.platform1.x -= 1
 
     if (gameState.active) {
 
