@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
       this.physics.add.collider(gameState.player, platform);
     })
     const platformGen = () => {
-      let yCoord = Math.random() * window.innerHeight;
+      const yCoord = Math.random() * (window.innerHeight - 150) + 150;
       let randomPlatform = this.physics.add.sprite(gameState.bg.width + 200, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
