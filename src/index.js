@@ -47,13 +47,13 @@ class GameScene extends Phaser.Scene {
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
     gameState.bg.setScale(1.25);
 
-    gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
+    gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
 
     this.createPlatforms();
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
-    gameState.platform3 = this.physics.add.sprite(2 * config.width, 300, 'platform');
+    gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
     gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
     gameState.platforms.forEach(platform => {
       platform.body.allowGravity = false;
@@ -63,8 +63,8 @@ class GameScene extends Phaser.Scene {
       this.physics.add.collider(gameState.player, platform);
     })
     const platformGen = () => {
-      let yCoord = Math.random() * config.height;
-      let randomPlatform = this.physics.add.sprite(gameState.bg.width, yCoord, 'platform')
+      let yCoord = Math.random() * window.innerHeight;
+      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 200, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
       randomPlatform.setVelocityX(-100);
@@ -267,12 +267,9 @@ class GameScene extends Phaser.Scene {
       if (!gameState.player.body.touching.down){
         // gameState.player.anims.play('jump', true);
       };
-      if (gameState.player.y > gameState.bg3.height - 1450) {
-
-      };
 
 
-      if (gameState.player.y > gameState.bg3.height - 1450) {
+      if (gameState.player.y > gameState.bg3.height - 1400) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
           if (progress > .9) {
