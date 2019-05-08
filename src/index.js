@@ -44,24 +44,39 @@ class GameScene extends Phaser.Scene {
 
     gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
-    gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
+    gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
+    gameState.bg.setScale(1.25);
 
     gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
 
 
-    // this.createPlatforms();
+    this.createPlatforms();
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
     gameState.platform3 = this.physics.add.sprite(2 * config.width, 300, 'platform');
-    const platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
-    platforms.forEach(platform => {
+    gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
+    gameState.platforms.forEach(platform => {
       platform.body.allowGravity = false;
       platform.body.immovable = true;
       platform.setVelocityX(-100);
 
       this.physics.add.collider(gameState.player, platform);
     })
+    const platformGen = () => {
+      let yCoord = Math.random() * config.height;
+      let randomPlatform = this.physics.add.sprite(gameState.bg.width, yCoord, 'platform')
+      randomPlatform.body.allowGravity = false;
+      randomPlatform.body.immovable = true;
+      randomPlatform.setVelocityX(-100);
+      this.physics.add.collider(gameState.player, randomPlatform);
+    }
 
+    const platformGenLoop = this.time.addEvent({
+      delay: 3000,
+      callback: platformGen,
+      callbackScope: this,
+      loop: true,
+    });
 
     this.createAnimations();
 
@@ -97,14 +112,15 @@ class GameScene extends Phaser.Scene {
       loop: true,
     });
 
-    this.physics.add.collider(bugs, gameState.platforms, function (bug) {
-      bug.destroy()
-    })
+    // this.physics.add.collider(bugs, gameState.platforms, function (bug) {
+    //   bug.destroy()
+    // })
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
       gameState.active = false;
       bugGenLoop.destroy();
+      platformGenLoop.destroy();
       this.physics.pause();
       this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
       this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
@@ -168,13 +184,7 @@ class GameScene extends Phaser.Scene {
 
     speed = Phaser.Math.GetSpeed(300, 1);
 
-    // gameState.platforms.move = this.tweens.add({
-    //   targets: gameState.platforms,
-    //   x: 320,
-    //   ease: 'Linear',
-    //   duration: 1800,
-    //   repeat: -1
-    // })
+
   }
 
   createPlatforms() {
@@ -236,7 +246,7 @@ class GameScene extends Phaser.Scene {
 
       if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
-        gameState.player.setVelocityX(200);
+        gameState.player.setVelocityX(300);
       }
       else if (gameState.cursors.left.isDown) {
         gameState.player.flipX = true;
@@ -249,7 +259,7 @@ class GameScene extends Phaser.Scene {
 
       if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
         // gameState.player.setVelocity(250);
-        gameState.player.setVelocityY(-500);
+        gameState.player.setVelocityY(-600);
         gameState.player.anims.play('jump', true);
       }
 
@@ -257,13 +267,13 @@ class GameScene extends Phaser.Scene {
       if (!gameState.player.body.touching.down){
         // gameState.player.anims.play('jump', true);
       };
-      if (gameState.player.y > gameState.bg3.height - 1475) {
-        gameState.player.anims.play('die', true);
+      if (gameState.player.y > gameState.bg3.height - 1450) {
+
       };
 
 
       if (gameState.player.y > gameState.bg3.height - 1450) {
-
+        gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
           if (progress > .9) {
             this.scene.restart(this.levelKey);
