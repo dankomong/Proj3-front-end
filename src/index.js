@@ -63,8 +63,8 @@ class GameScene extends Phaser.Scene {
       this.physics.add.collider(gameState.player, platform);
     })
     const platformGen = () => {
-      const yCoord = Math.random() * (window.innerHeight - 150) + 150;
-      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 200, yCoord, 'platform')
+      const yCoord = Math.random() * (window.innerHeight - 200) + 200;
+      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 300, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
       randomPlatform.setVelocityX(-100);
@@ -269,7 +269,7 @@ class GameScene extends Phaser.Scene {
       };
 
 
-      if (gameState.player.y > gameState.bg3.height - 1400) {
+      if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
           if (progress > .9) {
