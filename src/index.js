@@ -38,12 +38,15 @@ class GameScene extends Phaser.Scene {
   create() {
     gameState.active = true;
     gameState.platforms = this.physics.add.staticGroup();
+
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
     gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, 0);
-    this.createParallaxBackgrounds();
+
+
+
     this.createAnimations();
 
     gameState.player = this.physics.add.sprite(config.width / 2, 0, 'alien', 'idle/01').setScale(.8);
@@ -55,7 +58,7 @@ class GameScene extends Phaser.Scene {
       this.createPlatform(xIndex, yIndex);
     }
 
-    this.cameras.main.setBounds(0, 0, gameState.bg3.width, gameState.bg3.height);
+    this.cameras.main.setBounds(0, 0, gameState.bg.width, gameState.bg.height);
     this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
 
 
@@ -88,6 +91,8 @@ class GameScene extends Phaser.Scene {
     })
 
     this.physics.add.collider(gameState.player, bugs, () => {
+      gameState.player.play('die', true);
+      gameState.active = false;
       bugGenLoop.destroy();
       this.physics.pause();
       this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
@@ -151,7 +156,16 @@ class GameScene extends Phaser.Scene {
     cursors = this.input.keyboard.createCursorKeys();
 
     speed = Phaser.Math.GetSpeed(300, 1);
+
+    gameState.platforms.move = this.tweens.add({
+      targets: gameState.platforms,
+      x: 320,
+      ease: 'Linear',
+      duration: 1800,
+      repeat: -1
+    })
   }
+
 
   createPlatform(xIndex, yIndex) {
     // Creates a platform evenly spaced along the two indices.
@@ -191,51 +205,31 @@ class GameScene extends Phaser.Scene {
     const jumpFrames = this.anims.generateFrameNames('alien', {
       start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
     })
-    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 3 })
+    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 10 })
+    // die
+    const deathFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 5, zeroPad: 2, prefix: 'dead/'
+    })
+    this.anims.create({key: 'die', frames: deathFrames, frameRate: 5})
 
   }
 
-
-
-  createParallaxBackgrounds() {
-    // Add in the three background images here and set their origin
-
-    gameState.bg.setDisplaySize(config.width, config.height);
-
-    gameState.bg2.setOrigin(0, 0);
-    gameState.bg3.setOrigin(0, 0);
-
-    const game_width = parseFloat(gameState.bg3.getBounds().width)
-    gameState.width = game_width;
-    const window_width = config.width
-
-    const bg1_width = gameState.bg.getBounds().width
-    const bg2_width = gameState.bg2.getBounds().width
-    const bg3_width = gameState.bg3.getBounds().width
-
-    // Set the scroll factor for bg1, bg2, and bg3 here!
-    gameState.bg.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
-    gameState.bg2.setScrollFactor((bg2_width - window_width) /(game_width - window_width));
-  }
 
   update(time, delta) {
-    // gameState.bg.tilePositionX -= 0.05;
+
+
     gameState.bg2.tilePositionX += 5;
     gameState.bg3.tilePositionX += 10;
-    // if (game.input.activePointer.isDown) {
-    //     fire();
-    //  }
+    gameState.platforms.x -= 1
 
     if (gameState.active) {
-      gameState.player.anims.play('walk', true);
+
       if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
-        // gameState.player.anims.play('fire', true);
         gameState.player.setVelocityX(200);
       }
       else if (gameState.cursors.left.isDown) {
         gameState.player.flipX = true;
-        // gameState.player.anims.play('fire', true);
         gameState.player.setVelocityX(-200);
       }
       else {
@@ -252,9 +246,14 @@ class GameScene extends Phaser.Scene {
 
       if (!gameState.player.body.touching.down){
         // gameState.player.anims.play('jump', true);
-      }
+      };
+      if (gameState.player.y > gameState.bg3.height - 1475) {
+        gameState.player.anims.play('die', true);
+      };
 
-      if (gameState.player.y > gameState.bg3.height - 150) {
+
+      if (gameState.player.y > gameState.bg3.height - 1450) {
+
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
           if (progress > .9) {
             this.scene.restart(this.levelKey);
@@ -281,7 +280,7 @@ const config = {
   type: Phaser.AUTO,
   width: window.innerWidth - 15,
   height: window.innerHeight - 25,
-  backgroundColor: "0x18235C",
+  backgroundColor: "010408",
   physics: {
     default: 'arcade',
     arcade: {
