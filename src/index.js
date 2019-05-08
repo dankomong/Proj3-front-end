@@ -264,7 +264,8 @@ class GameScene extends Phaser.Scene {
 
       // BUTTON FOR SHOOTING
       if (gameState.cursors.space.isDown && time > lastFired) {
-           var bullet = bullets.get();
+        gameState.player.anims.play('fire', true);
+          var bullet = bullets.get();
 
            if (bullet){
                bullet.fire(gameState.player.x, gameState.player.y);
