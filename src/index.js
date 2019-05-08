@@ -11,6 +11,40 @@ let stats;
 let cursors;
 let lastFired = 0;
 
+var Bullet = new Phaser.Class({
+
+    Extends: Phaser.GameObjects.Image,
+
+    initialize:
+
+    function Bullet (scene)
+    {
+        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
+
+        this.speed = Phaser.Math.GetSpeed(400, 1);
+
+    },
+
+    fire: function (x, y)
+    {
+        this.setPosition(x, y + 5)
+        this.setActive(true);
+        this.setVisible(true);
+    },
+
+    update: function (time, delta)
+    {
+        this.x += this.speed * delta;
+
+        if (this.x > 820)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+        }
+    }
+
+});
+
 class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
@@ -48,6 +82,7 @@ class GameScene extends Phaser.Scene {
     gameState.bg.setScale(1.25);
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
+    gameState.player.body.gravity.y = 800;
 
 
     this.createPlatforms();
@@ -63,7 +98,7 @@ class GameScene extends Phaser.Scene {
       this.physics.add.collider(gameState.player, platform);
     })
     const platformGen = () => {
-      const yCoord = Math.random() * (window.innerHeight - 200) + 200;
+      const yCoord = Math.random() * (window.innerHeight - 200) + 150;
       let randomPlatform = this.physics.add.sprite(gameState.bg.width + 300, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
@@ -102,7 +137,7 @@ class GameScene extends Phaser.Scene {
     const bugGen = () => {
       const xCoord = Math.random() * window.innerWidth * 2
       let randomBug = bugList[Math.floor(Math.random() * 3)]
-      bugs.create(xCoord, 10, randomBug)
+      bugs.create(xCoord, 10, randomBug).body.gravity.y = 800;
     }
 
     const bugGenLoop = this.time.addEvent({
@@ -122,6 +157,7 @@ class GameScene extends Phaser.Scene {
       bugGenLoop.destroy();
       platformGenLoop.destroy();
       this.physics.pause();
+      console.log(this)
       this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
       this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
@@ -134,51 +170,23 @@ class GameScene extends Phaser.Scene {
 
     // gameState.player.frame = 5
 
-    var Bullet = new Phaser.Class({
 
-        Extends: Phaser.GameObjects.Image,
-
-        initialize:
-
-        function Bullet (scene)
-        {
-            Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
-
-            this.speed = Phaser.Math.GetSpeed(400, 1);
-
-        },
-
-        fire: function (x, y)
-        {
-            this.setPosition(x, y + 5)
-            this.setActive(true);
-            this.setVisible(true);
-        },
-
-        update: function (time, delta)
-        {
-            this.x += this.speed * delta;
-
-            if (this.x > 820)
-            {
-                this.setActive(false);
-                this.setVisible(false);
-            }
-        }
-
-    });
 
     //  Limited to 20 objects in the pool, not allowed to grow beyond it
     // bullets = this.pool.createObjectPool(Bullet, 20);
 
-    bullets = this.add.group({
+    bullets = this.physics.add.group({
         classType: Bullet,
-        maxSize: 30,
+        maxSize: 40,
         runChildUpdate: true
     });
 
     //  Create the objects in advance, so they're ready and waiting in the pool
     bullets.create(20);
+
+    this.physics.add.overlap(bugs, bullets, function(bug) {
+      bug.destroy();
+    })
 
     cursors = this.input.keyboard.createCursorKeys();
 
@@ -302,11 +310,11 @@ const config = {
     default: 'arcade',
     arcade: {
       //debug: true,
-      gravity: { y: 800 },
+      //gravity: { y: 800 },
       enableBody: true,
     }
   },
-  scene: [GameScene]
+  scene: [StartScene, GameScene]
 };
 
 const game = new Phaser.Game(config);
