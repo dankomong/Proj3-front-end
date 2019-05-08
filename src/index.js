@@ -5,11 +5,51 @@ console.log('hello world')
 
 const gameState = {};
 let bullets;
+let bullet;
 let ship;
 let speed;
 let stats;
 let cursors;
 let lastFired = 0;
+let weapon;
+
+
+    // new phaser class for bullet;
+var Bullet = new Phaser.Class({
+
+    Extends: Phaser.Physics.Arcade.Sprite,
+
+    initialize:
+
+    function Bullet(scene)
+    {
+        Phaser.Physics.Arcade.Sprite.call(this, scene, 0, 0, 'bullet', 40)
+        this.speed = Phaser.Math.GetSpeed(400, 1);
+        // console.log('this', this)
+        // this.scene.physics.world.enable(this);
+        // this.scene.add.existing(this);
+    },
+
+    fire: function (x, y)
+    {
+        this.setPosition(x, y + 5)
+        this.setActive(true);
+        this.setVisible(true);
+    },
+
+    update: function (time, delta)
+    {
+        this.x += this.speed * delta;
+
+        // how far the bullet travels on the screen
+        if (this.x > 2020)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+        }
+    }
+
+});
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -44,6 +84,8 @@ class GameScene extends Phaser.Scene {
     this.createParallaxBackgrounds();
 
     gameState.player = this.physics.add.sprite(50, 100, 'alien').setScale(.8);
+    gameState.player.body.gravity.y = 800;
+    console.log('player', gameState.player)
 
     for (const [xIndex, yIndex] of this.heights.entries()) {
       this.createPlatform(xIndex, yIndex);
@@ -79,13 +121,14 @@ class GameScene extends Phaser.Scene {
     // });
 
     const bugs = this.physics.add.group();
-
+    console.log('bugs', bugs)
     const bugList = ['bug1', 'bug2', 'bug3']
 
     const bugGen = () => {
       const xCoord = Math.random() * window.innerWidth * 2
       let randomBug = bugList[Math.floor(Math.random() * 3)]
-      bugs.create(xCoord, 10, randomBug)
+      bugs.create(xCoord, 10, randomBug).body.gravity.y = 1000;
+      //gameState.player.body.gravity.y = 800;
     }
 
     const bugGenLoop = this.time.addEvent({
@@ -116,55 +159,21 @@ class GameScene extends Phaser.Scene {
     gameState.cursors = this.input.keyboard.createCursorKeys();
     // gameState.player.frame = 5
 
-    // new phaser class for bullet;
-    var Bullet = new Phaser.Class({
 
-        Extends: Phaser.GameObjects.Image,
-
-        initialize:
-
-        function Bullet(scene)
-        {
-            Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
-
-            this.speed = Phaser.Math.GetSpeed(400, 1);
-
-        },
-
-        fire: function (x, y)
-        {
-            this.setPosition(x, y + 5)
-            this.setActive(true);
-            this.setVisible(true);
-        },
-
-        update: function (time, delta)
-        {
-            this.x += this.speed * delta;
-
-            // how far the bullet travels on the screen
-            if (this.x > 2020)
-            {
-                this.setActive(false);
-                this.setVisible(false);
-            }
-        }
-
-    });
-
+    // BULLET IMPLEMENTATION
     //  Limited to 20 objects in the pool, not allowed to grow beyond it
     // bullets = this.pool.createObjectPool(Bullet, 20);
 
-    bullets = this.add.group({
+    bullets = this.physics.add.group({
         classType: Bullet,
-        maxSize: 30,
+        maxSize: 40,
         runChildUpdate: true
     });
+    console.log('bullet obj', bullets )
+    //bullets.scene.physics.config.gravity.y = 0;
+    //console.log('second', bullets.scene.physics.config.gravity.y )
 
-    //  Create the objects in advance, so they're ready and waiting in the pool
-    bullets.create(20);
-
-    this.physics.add.collider(bullets, bug, function (bug) {
+    this.physics.add.overlap(bugs, bullets, function (bug) {
       bug.destroy()
     })
 
@@ -246,8 +255,8 @@ class GameScene extends Phaser.Scene {
       }
 
       // BUTTON FOR SHOOTING
-      if (gameState.cursors.space.isDown && time > lastFired) {
-           var bullet = bullets.get();
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && time > lastFired) {
+          let bullet = bullets.get();
 
            if (bullet){
                bullet.fire(gameState.player.x, gameState.player.y);
@@ -268,7 +277,7 @@ const config = {
     default: 'arcade',
     arcade: {
       //debug: true,
-      gravity: { y: 800 },
+      // gravity: { y: 800 },
       enableBody: true,
     }
   },
