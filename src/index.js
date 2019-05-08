@@ -4,6 +4,12 @@ console.log('hello world')
 // document.querySelector('body').appendChild(img)
 
 const gameState = {};
+let bullets;
+let ship;
+let speed;
+let stats;
+let cursors;
+let lastFired = 0;
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -16,8 +22,16 @@ class GameScene extends Phaser.Scene {
     // this.load.image('bg', './assets/bkgd_0.png');
     this.load.image('bg2', './assets/bkgd_1.png');
     this.load.image('bg3', './assets/bkgd_4.png');
+
+    //this.load.image('bullet', 'assets/sprites/purple_ball.png')
+
+    this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
+		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
+		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
+
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
     this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+    this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
   }
 
   create() {
@@ -64,16 +78,98 @@ class GameScene extends Phaser.Scene {
     //   repeat: -1
     // });
 
+    const bugs = this.physics.add.group();
+
+    const bugList = ['bug1', 'bug2', 'bug3']
+
+    const bugGen = () => {
+      const xCoord = Math.random() * window.innerWidth * 2
+      let randomBug = bugList[Math.floor(Math.random() * 3)]
+      bugs.create(xCoord, 10, randomBug)
+    }
+
+    const bugGenLoop = this.time.addEvent({
+      delay: 400,
+      callback: bugGen,
+      callbackScope: this,
+      loop: true,
+    });
+
+    this.physics.add.collider(bugs, gameState.platforms, function (bug) {
+      bug.destroy()
+    })
+
+    this.physics.add.collider(gameState.player, bugs, () => {
+      bugGenLoop.destroy();
+      this.physics.pause();
+      this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+      this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+      this.input.on('pointerup', () => {
+        gameState.score = 0;
+        this.scene.restart();
+      });
+    });
+
     gameState.player.anims.play('idle', true);
     gameState.player.setCollideWorldBounds(true);
     gameState.cursors = this.input.keyboard.createCursorKeys();
     // gameState.player.frame = 5
 
+    var Bullet = new Phaser.Class({
+
+        Extends: Phaser.GameObjects.Image,
+
+        initialize:
+
+        function Bullet (scene)
+        {
+            Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
+
+            this.speed = Phaser.Math.GetSpeed(400, 1);
+            
+        },
+
+        fire: function (x, y)
+        {
+            this.setPosition(x, y + 5)
+            this.setActive(true);
+            this.setVisible(true);
+        },
+
+        update: function (time, delta)
+        {
+            this.x += this.speed * delta;
+
+            if (this.x > 820)
+            {
+                this.setActive(false);
+                this.setVisible(false);
+            }
+        }
+
+    });
+
+    //  Limited to 20 objects in the pool, not allowed to grow beyond it
+    // bullets = this.pool.createObjectPool(Bullet, 20);
+
+    bullets = this.add.group({
+        classType: Bullet,
+        maxSize: 30,
+        runChildUpdate: true
+    });
+
+    //  Create the objects in advance, so they're ready and waiting in the pool
+    bullets.create(20);
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+    speed = Phaser.Math.GetSpeed(300, 1);
   }
 
   createPlatform(xIndex, yIndex) {
-  // Creates a platform evenly spaced along the two indices.
-  // If either is not a number it won't make a platform
+    // Creates a platform evenly spaced along the two indices.
+    // If either is not a number it won't make a platform
     if (typeof yIndex === 'number' && typeof xIndex === 'number') {
       gameState.platforms.create((250 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
     }
@@ -100,16 +196,16 @@ class GameScene extends Phaser.Scene {
     gameState.bg2.setScrollFactor((bg2_width - window_width) /(game_width - window_width));
   }
 
-  update() {
+  update(time, delta) {
     // gameState.bg.tilePositionX -= 0.05;
     // gameState.bg2.tilePositionX += 5;
     // gameState.bg3.tilePositionX += 10;
+    // if (game.input.activePointer.isDown) {
+    //     fire();
+    //  }
 
     if (gameState.active) {
-      if (gameState.cursors.space.isDown) {
-        // gameState.player.anims.play('fire', true);
-      }
-      else if (gameState.cursors.right.isDown) {
+      if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
         // gameState.player.anims.play('fire', true);
         gameState.player.setVelocityX(200);
@@ -135,6 +231,24 @@ class GameScene extends Phaser.Scene {
         // gameState.player.anims.play('jump', true);
       }
 
+      if (gameState.player.y > gameState.bg3.height - 150) {
+        this.cameras.main.shake(240, .01, false, function(camera, progress) {
+          if (progress > .9) {
+            this.scene.restart(this.levelKey);
+          }
+        });
+      }
+
+      // BUTTON FOR SHOOTING
+      if (gameState.cursors.space.isDown && time > lastFired) {
+           var bullet = bullets.get();
+
+           if (bullet){
+               bullet.fire(gameState.player.x, gameState.player.y);
+               lastFired = time + 50;
+           }
+       }
+
     }
   }
 }
@@ -147,7 +261,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
+      //debug: true,
       gravity: { y: 800 },
       enableBody: true,
     }
