@@ -105,7 +105,7 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
-      if (gameState.lives >= 0) {
+      if (gameState.lives > 0) {
         gameState.lives -= 1
         console.log(gameState.lives)
         this.scene.restart();
@@ -242,14 +242,14 @@ class GameScene extends Phaser.Scene {
       if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9 && gameState.lives >= 0) {
+          if (progress > .9 && gameState.lives > 0) {
             this.scene.restart(this.levelKey);
             gameState.lives -= 1
             console.log(gameState.lives)
           }
           else  {
             gameState.active = false;
-            // this.physics.pause();
+            this.physics.pause();
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
@@ -259,8 +259,8 @@ class GameScene extends Phaser.Scene {
             this.input.on('pointerup', () => {
               gameState.score = 0;
               gameState.lives = 3;
-              getPlayerName();
               this.scene.restart();
+              getPlayerName();
             })
           }
         });
