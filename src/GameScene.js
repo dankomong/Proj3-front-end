@@ -85,7 +85,7 @@ class GameScene extends Phaser.Scene {
 
     // bugs
 
-    const bugs = this.physics.add.group();
+    bugs = this.physics.add.group();
 
     const bugList = ['bug1', 'bug2', 'bug3']
 
@@ -113,7 +113,7 @@ class GameScene extends Phaser.Scene {
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else {
+      else if (gameState.lives === 0) {
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
@@ -247,9 +247,11 @@ class GameScene extends Phaser.Scene {
           else if (gameState.lives === 0) {
             gameState.active = false;
             this.physics.pause();
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+            this.scene.stop('GameScene');
+      			this.scene.start('Highscore');
+            // this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            // this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            // this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;

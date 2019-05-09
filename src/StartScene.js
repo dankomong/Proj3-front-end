@@ -19,10 +19,13 @@ class StartScene extends Phaser.Scene {
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
     gameState.bg.setScale(1.25);
-		this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Click to start!', { fontSize: '15px', fill: '#2996b3' });
+		this.add.text((config.width / 2) - 60, (config.height / 2) - 60, `
+			Hey, ${gameState.playerName}
+			Click to start`, { fontSize: '30px', fill: '#b37329' });
 
 		this.input.on('pointerdown', () => {
-			this.scene.stop('StarScene')
+			gameState.score = 0;
+			this.scene.stop('StartScene')
 			this.scene.start('GameScene')
 		})
 	}

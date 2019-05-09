@@ -4,9 +4,23 @@ console.log('hello world')
 // document.querySelector('body').appendChild(img)
 
 const gameState = {
-  score: 0,
   lives: 3
 };
+
+function getPlayerName() {
+  gameState.playerName = prompt("Please enter your name:", "");
+  fetch('http://localhost:3000/players', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+}
+
+getPlayerName();
+
+
 let bullets;
 let ship;
 let speed;
@@ -62,7 +76,7 @@ const config = {
       enableBody: true,
     }
   },
-  scene: [StartScene, GameScene]
+  scene: [StartScene, GameScene, EndScene]
 };
 
 const game = new Phaser.Game(config);
