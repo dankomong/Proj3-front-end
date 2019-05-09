@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>phaser</string>
         <key>textureFileName</key>
-        <filename>alien-{n}.png</filename>
+        <filename></filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -82,7 +82,7 @@
         <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">png8</enum>
         <key>borderPadding</key>
         <uint>0</uint>
         <key>maxTextureSize</key>
@@ -102,7 +102,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Grid</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -151,7 +151,7 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>prependSmartFolderName</key>
         <false/>
         <key>autodetectAnimations</key>
@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -181,7 +181,268 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0000_idle_1.png</key>
+            <key type="filename">alien/attack/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>56,107,111,214</rect>
+                <key>scale9Paddings</key>
+                <rect>56,107,111,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/attack/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>70,107,141,214</rect>
+                <key>scale9Paddings</key>
+                <rect>70,107,141,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/attack/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>108,107,215,214</rect>
+                <key>scale9Paddings</key>
+                <rect>108,107,215,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/attack/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>134,107,267,214</rect>
+                <key>scale9Paddings</key>
+                <rect>134,107,267,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/dead/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>87,103,173,205</rect>
+                <key>scale9Paddings</key>
+                <rect>87,103,173,205</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/dead/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>103,82,207,165</rect>
+                <key>scale9Paddings</key>
+                <rect>103,82,207,165</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/dead/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>97,60,193,121</rect>
+                <key>scale9Paddings</key>
+                <rect>97,60,193,121</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/dead/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>102,47,205,93</rect>
+                <key>scale9Paddings</key>
+                <rect>102,47,205,93</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/dead/05.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>102,53,203,105</rect>
+                <key>scale9Paddings</key>
+                <rect>102,53,203,105</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>57,107,115,214</rect>
+                <key>scale9Paddings</key>
+                <rect>57,107,115,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>61,106,122,211</rect>
+                <key>scale9Paddings</key>
+                <rect>61,106,122,211</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,105,151,211</rect>
+                <key>scale9Paddings</key>
+                <rect>75,105,151,211</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,107,100,214</rect>
+                <key>scale9Paddings</key>
+                <rect>50,107,100,214</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/05.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>58,110,115,219</rect>
+                <key>scale9Paddings</key>
+                <rect>58,110,115,219</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/06.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>77,108,154,215</rect>
+                <key>scale9Paddings</key>
+                <rect>77,108,154,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/07.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>89,108,177,215</rect>
+                <key>scale9Paddings</key>
+                <rect>89,108,177,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/08.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>94,108,189,215</rect>
+                <key>scale9Paddings</key>
+                <rect>94,108,189,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/09.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>114,108,227,215</rect>
+                <key>scale9Paddings</key>
+                <rect>114,108,227,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/10.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>119,108,238,215</rect>
+                <key>scale9Paddings</key>
+                <rect>119,108,238,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/fire/11.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>122,108,243,215</rect>
+                <key>scale9Paddings</key>
+                <rect>122,108,243,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/hurt/01.png</key>
+            <key type="filename">alien/idle/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -194,7 +455,46 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0001_idle_2.png</key>
+            <key type="filename">alien/hurt/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>51,106,101,211</rect>
+                <key>scale9Paddings</key>
+                <rect>51,106,101,211</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/hurt/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>55,108,111,215</rect>
+                <key>scale9Paddings</key>
+                <rect>55,108,111,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/hurt/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>56,108,113,216</rect>
+                <key>scale9Paddings</key>
+                <rect>56,108,113,216</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/idle/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -207,7 +507,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0002_idle_3.png</key>
+            <key type="filename">alien/idle/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -220,163 +520,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0006_walk_1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>48,109,97,218</rect>
-                <key>scale9Paddings</key>
-                <rect>48,109,97,218</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0007_walk_2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>50,111,100,221</rect>
-                <key>scale9Paddings</key>
-                <rect>50,111,100,221</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0008_walk_3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>48,110,97,220</rect>
-                <key>scale9Paddings</key>
-                <rect>48,110,97,220</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0009_walk_4.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>45,108,90,215</rect>
-                <key>scale9Paddings</key>
-                <rect>45,108,90,215</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0010_walk_5.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>46,109,92,217</rect>
-                <key>scale9Paddings</key>
-                <rect>46,109,92,217</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0011_walk_6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>44,109,88,217</rect>
-                <key>scale9Paddings</key>
-                <rect>44,109,88,217</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0012_run_1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>49,109,97,217</rect>
-                <key>scale9Paddings</key>
-                <rect>49,109,97,217</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0013_run_2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>49,110,97,221</rect>
-                <key>scale9Paddings</key>
-                <rect>49,110,97,221</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0014_run_3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>54,106,109,213</rect>
-                <key>scale9Paddings</key>
-                <rect>54,106,109,213</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0015_run_4.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>44,109,89,218</rect>
-                <key>scale9Paddings</key>
-                <rect>44,109,89,218</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0016_run_5.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>51,108,102,216</rect>
-                <key>scale9Paddings</key>
-                <rect>51,108,102,216</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0017_run_6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>55,108,109,215</rect>
-                <key>scale9Paddings</key>
-                <rect>55,108,109,215</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0027_jump_1.png</key>
+            <key type="filename">alien/jump/01.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -389,7 +533,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0028_jump_2.png</key>
+            <key type="filename">alien/jump/02.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -402,7 +546,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0028_jump_3.png</key>
+            <key type="filename">alien/jump/03.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -415,7 +559,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../../Downloads/alien_armor/armor__0030_jump_4.png</key>
+            <key type="filename">alien/jump/04.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -425,31 +569,208 @@
                 <rect>83,93,165,186</rect>
                 <key>scale9Paddings</key>
                 <rect>83,93,165,186</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>49,109,97,217</rect>
+                <key>scale9Paddings</key>
+                <rect>49,109,97,217</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>49,110,97,221</rect>
+                <key>scale9Paddings</key>
+                <rect>49,110,97,221</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>54,106,109,213</rect>
+                <key>scale9Paddings</key>
+                <rect>54,106,109,213</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>44,109,89,218</rect>
+                <key>scale9Paddings</key>
+                <rect>44,109,89,218</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/05.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>51,108,102,216</rect>
+                <key>scale9Paddings</key>
+                <rect>51,108,102,216</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/run/06.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>55,108,109,215</rect>
+                <key>scale9Paddings</key>
+                <rect>55,108,109,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/turn/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>53,108,107,216</rect>
+                <key>scale9Paddings</key>
+                <rect>53,108,107,216</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/turn/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>51,108,103,216</rect>
+                <key>scale9Paddings</key>
+                <rect>51,108,103,216</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/turn/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>51,108,101,216</rect>
+                <key>scale9Paddings</key>
+                <rect>51,108,101,216</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/01.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,109,97,218</rect>
+                <key>scale9Paddings</key>
+                <rect>48,109,97,218</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/02.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,111,100,221</rect>
+                <key>scale9Paddings</key>
+                <rect>50,111,100,221</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/03.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,110,97,220</rect>
+                <key>scale9Paddings</key>
+                <rect>48,110,97,220</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/04.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>45,108,90,215</rect>
+                <key>scale9Paddings</key>
+                <rect>45,108,90,215</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/05.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>46,109,92,217</rect>
+                <key>scale9Paddings</key>
+                <rect>46,109,92,217</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">alien/walk/06.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>44,109,88,217</rect>
+                <key>scale9Paddings</key>
+                <rect>44,109,88,217</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../../Downloads/alien_armor/armor__0000_idle_1.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0001_idle_2.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0002_idle_3.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0006_walk_1.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0007_walk_2.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0008_walk_3.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0009_walk_4.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0010_walk_5.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0011_walk_6.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0012_run_1.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0013_run_2.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0014_run_3.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0015_run_4.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0016_run_5.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0017_run_6.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0027_jump_1.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0028_jump_2.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0028_jump_3.png</filename>
-            <filename>../../../../../Downloads/alien_armor/armor__0030_jump_4.png</filename>
+            <filename>alien</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

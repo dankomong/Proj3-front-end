@@ -58,33 +58,13 @@ class Level extends Phaser.Scene {
   }
 
   createAnimations() {
-    this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNumbers('codey', { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1
+    // attack
+    const attackFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 4, zeroPad: 2,
+      prefix: 'attack/'
+      });
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5
     });
-
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('codey', { start: 4, end: 5 }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'jump',
-      frames: this.anims.generateFrameNumbers('codey', { start: 2, end: 3 }),
-      frameRate: 10,
-      repeat: -1
-    })
-
-    this.anims.create({
-      key: 'fire',
-      frames: this.anims.generateFrameNumbers('campfire'),
-      frameRate: 10,
-      repeat: -1
-    })
   }
 
   createParallaxBackgrounds() {
