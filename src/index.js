@@ -25,7 +25,7 @@ function getPlayerName() {
 getPlayerName();
 
 function postScoreToDatabase() {
-  fetch('http://localhost:3000/scores', {
+  return fetch('http://localhost:3000/scores', {
       method: 'POST',
       body: JSON.stringify({
         score: gameState.score,
@@ -118,7 +118,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
+      // debug: true,
       //gravity: { y: 800 },
       enableBody: true,
     }

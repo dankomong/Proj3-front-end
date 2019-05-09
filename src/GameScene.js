@@ -105,20 +105,28 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
-      if (gameState.lives > 0) {
+      if (gameState.lives >= 0) {
         gameState.lives -= 1
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else if (gameState.lives === 0) {
+      else  { //gameState.lives === 0)
+        console.log('dead')
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
         this.add.text(config.width / 2, (config.height / 2) - 100, 'Game Over', { fontSize: '15px', fill: '#b37329' });
         this.add.text(config.width / 2, (config.height / 2) - 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-        this.add.text(window.innerWidth / 2, (window.innerHeight / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
-        postScoreToDatabase();
+        this.add.text(config.width / 2, (config.height / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+        postScoreToDatabase().then(
+        fetch('http://localhost:3000/scores')
+    			.then(res => res.json())
+    			.then(scores => {console.log(scores);
+    				for(let i = 0; i < scores.length; i++) {
+    					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
+    				}
+    			}));
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
@@ -234,18 +242,19 @@ class GameScene extends Phaser.Scene {
       if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9 && gameState.lives > 0) {
+          if (progress > .9 && gameState.lives >= 0) {
             this.scene.restart(this.levelKey);
             gameState.lives -= 1
             console.log(gameState.lives)
           }
-          else if (gameState.lives === 0) {
+          else  {
             gameState.active = false;
             // this.physics.pause();
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
-            postScoreToDatabase()
+            postScoreToDatabase();
+            console.log('i fell!')
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
