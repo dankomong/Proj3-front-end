@@ -18,16 +18,19 @@ class GameScene extends Phaser.Scene {
 		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
+    this.load.image('face', './assets/alienface.png');
+
     // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
     this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
+    //this.load.spritesheet('enemy', 'http://www.feplanet.net/media/sprites/8/battle/sheets/enemy/monster_gorgon_magic.gif', 'assets');
+
+
     this.load.multiatlas('alien', './assets/alien.json', 'assets');
 
   }
 
   create() {
     gameState.active = true;
-    // gameState.platforms = this.physics.add.group();
-    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -40,8 +43,17 @@ class GameScene extends Phaser.Scene {
     //var angle = Math.atan2(mouse y - sprite y, mouse x - sprite x ) * (180/Math.PI);
     //console.log('ANGLE', angle)
 
+    // gameState.lives = 3;
+    // let xCoord = 50;
+    // for (let i = 0; i < gameState.lives; i++) {
+    //     gameState.face = this.add.tileSprite(xCoord, 700, 0, 0, 'face')
+    //     xCoord += 60;
+    // }
+
+
     gameState.player.body.gravity.y = 800;
 
+    //gameState.enemy = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
@@ -54,8 +66,10 @@ class GameScene extends Phaser.Scene {
 
       this.physics.add.collider(gameState.player, platform);
     })
+
+    let yCoord = 0;
     const platformGen = () => {
-      const yCoord = Math.random() * (window.innerHeight - 200) + 150;
+      yCoord = Math.random() * (window.innerHeight - 200) + 150;
       let randomPlatform = this.physics.add.sprite(gameState.bg.width + 300, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
@@ -81,9 +95,8 @@ class GameScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
 
 
-    this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
-
-
+    //this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
+    //this.cameras.main.startFollow(gameState.face1, true, 0.5, 0.5)
 
     // bugs
 
@@ -107,11 +120,21 @@ class GameScene extends Phaser.Scene {
     // this.physics.add.collider(bugs, gameState.platforms, function (bug) {
     //   bug.destroy()
     // })
+    let xCoord = 50;
+    for (let i = 0; i < gameState.lives; i++) {
+        this.add.tileSprite(xCoord, 700, 0, 0, 'face')
+        xCoord += 60;
+    }
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
       if (gameState.lives > 0) {
         gameState.lives -= 1
+        let xCoord = 50;
+        for (let i = 0; i < gameState.lives; i++) {
+            this.add.tileSprite(xCoord, 700, 0, 0, 'face')
+            xCoord += 60;
+        }
         console.log(gameState.lives)
         this.scene.restart();
       }
@@ -134,6 +157,7 @@ class GameScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-enter', () => {
           gameState.score = 0;
           gameState.lives = 3;
+
           getPlayerName();
           this.scene.restart();
         }
@@ -237,7 +261,7 @@ class GameScene extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && this.jump > 0) {
         this.jump--;
         // gameState.player.setVelocity(250);
-        gameState.player.setVelocityY(-600);
+        gameState.player.setVelocityY(-500);
         gameState.player.anims.play('jump', true);
       }
 
@@ -296,6 +320,7 @@ class GameScene extends Phaser.Scene {
           var bullet = bullets.get();
           bullet.setActive(true);
           bullet.setVisible(true);
+          bullet.collideWorldBounds=false;
 
            if (bullet){
              //console.log('bullet', bullet)

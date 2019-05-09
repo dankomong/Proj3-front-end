@@ -73,16 +73,7 @@ var Bullet = new Phaser.Class({
 
     update: function (time, delta)
     {
-        // Update position based on velocity
-        // if (gameState.tracking === false) {
-        //   this.x += this.speed * delta;
-        // }
-        // else if (gameState.tracking) {
-        //   this.x -= this.speed * delta;
-        // }
         this.x += this.speed * delta;
-        //this.y += this.velocity.y * delta;
-        // this.x -= this.speed * delta;
 
         if (this.x > 1820)
         {
@@ -96,8 +87,8 @@ var Bullet = new Phaser.Class({
 
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth - 15,
-  height: window.innerHeight - 25,
+  width: window.innerWidth,
+  height: window.innerHeight,
   backgroundColor: "010408",
   physics: {
     default: 'arcade',
