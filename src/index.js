@@ -168,7 +168,8 @@ class GameScene extends Phaser.Scene {
         platformGenLoop.destroy();
         this.physics.pause();
         this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
@@ -301,6 +302,7 @@ class GameScene extends Phaser.Scene {
             gameState.active = false;
             this.physics.pause();
             this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
             this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
             this.input.on('pointerup', () => {
