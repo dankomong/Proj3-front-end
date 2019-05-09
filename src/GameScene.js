@@ -119,18 +119,18 @@ class GameScene extends Phaser.Scene {
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
         this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
         or
-        Click to Restart`, { fontSize: '15px', fill: '#ffffff' });
+        Click to Restart`, { fontSize: '15px', fill: '#b37329' });
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
           gameState.lives = 3;
           this.scene.restart();
         })
-        this.input.keyboard.on('keydown', () => {
+        this.input.keyboard.on('keydown-enter', () => {
           gameState.score = 0;
           gameState.lives = 3;
           getPlayerName();
@@ -255,12 +255,12 @@ class GameScene extends Phaser.Scene {
           }
           else if (gameState.lives === 0) {
             gameState.active = false;
-            this.physics.pause();
-            this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-            this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            // this.physics.pause();
+            this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
+            this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
             this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
             or
-            Click to Restart`, { fontSize: '15px', fill: '#ffffff' });
+            Click to Restart`, { fontSize: '15px', fill: '#b37329' });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
