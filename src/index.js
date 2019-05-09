@@ -292,8 +292,21 @@ class GameScene extends Phaser.Scene {
       if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9) {
+          if (progress > .9 && gameState.lives > 0) {
             this.scene.restart(this.levelKey);
+            gameState.lives -= 1
+            console.log(gameState.lives)
+          }
+          else if (gameState.lives === 0) {
+            gameState.active = false;
+            this.physics.pause();
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+            this.input.on('pointerup', () => {
+              gameState.score = 0;
+              this.scene.restart();
+            })
           }
         });
       }
