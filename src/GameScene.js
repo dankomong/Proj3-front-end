@@ -25,6 +25,8 @@ class GameScene extends Phaser.Scene {
 
   create() {
     gameState.active = true;
+    // gameState.platforms = this.physics.add.group();
+    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -40,6 +42,7 @@ class GameScene extends Phaser.Scene {
     gameState.player.body.gravity.y = 800;
 
 
+    this.createPlatforms();
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
     gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
@@ -112,21 +115,22 @@ class GameScene extends Phaser.Scene {
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else if (gameState.lives === 0) {
+      else {
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
         this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
           gameState.lives = 3;
           this.scene.restart();
-          })
-        }});
+        })
+      };
+    });
 
 
     // gameState.player.frame = 5
@@ -157,6 +161,11 @@ class GameScene extends Phaser.Scene {
 
 
   }
+
+  createPlatforms() {
+
+  }
+
 
   createAnimations() {
 
@@ -197,12 +206,16 @@ class GameScene extends Phaser.Scene {
 
   }
 
+  createPlatforms() {
+
+  }
 
 
   update(time, delta) {
 
-    gameState.bg2.tilePositionX += 6;
-    gameState.bg3.tilePositionX += 11;
+    gameState.bg2.tilePositionX += 5;
+    gameState.bg3.tilePositionX += 10;
+    // gameState.platform1.x -= 1
 
     if (gameState.active) {
 
@@ -253,13 +266,13 @@ class GameScene extends Phaser.Scene {
               gameState.lives = 3;
               this.scene.restart();
             })
-
-        };
-      })
+          }
+        });
+      }
 
       // BUTTON FOR SHOOTING
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) ) { //&& time > lastFired
-        console.log('working?')
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && time > lastFired) {
+
         // if (gameState.cursors.left.isDown) {
         //   console.log('player left', gameState.player)
         //   gameState.tracking = true;
@@ -284,4 +297,4 @@ class GameScene extends Phaser.Scene {
 
     }
   }
-}}
+}
