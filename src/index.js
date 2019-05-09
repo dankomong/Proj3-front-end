@@ -4,7 +4,8 @@ console.log('hello world')
 // document.querySelector('body').appendChild(img)
 
 const gameState = {
-  score: 0
+  score: 0,
+  lives: 3
 };
 let bullets;
 let ship;
@@ -156,18 +157,24 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
-      gameState.active = false;
-      bugGenLoop.destroy();
-      platformGenLoop.destroy();
-      this.physics.pause();
-      console.log(this)
-      this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-      this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
-
-      this.input.on('pointerup', () => {
-        gameState.score = 0;
+      if (gameState.lives > 0) {
+        gameState.lives -= 1
+        console.log(gameState.lives)
         this.scene.restart();
-      });
+      }
+      else {
+        gameState.active = false;
+        bugGenLoop.destroy();
+        platformGenLoop.destroy();
+        this.physics.pause();
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+        this.input.on('pointerup', () => {
+          gameState.score = 0;
+          this.scene.restart();
+        })
+      };
     });
 
 
