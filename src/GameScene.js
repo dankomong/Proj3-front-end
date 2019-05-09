@@ -42,7 +42,6 @@ class GameScene extends Phaser.Scene {
     gameState.player.body.gravity.y = 800;
 
 
-    this.createPlatforms();
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
     gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
@@ -115,14 +114,29 @@ class GameScene extends Phaser.Scene {
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else {
+      else if (gameState.lives === 0) {
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
         this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
         this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
+        or
+        Click to Restart`, { fontSize: '15px', fill: '#ffffff' });
 
+        this.input.on('pointerup', () => {
+          gameState.score = 0;
+          gameState.lives = 3;
+          this.scene.restart();
+        })
+        this.input.keyboard.on('keydown', () => {
+          gameState.score = 0;
+          gameState.lives = 3;
+          getPlayerName();
+          this.scene.restart();
+        }
+        )
       };
     });
 
@@ -155,11 +169,6 @@ class GameScene extends Phaser.Scene {
 
 
   }
-
-  createPlatforms() {
-
-  }
-
 
   createAnimations() {
 
@@ -197,10 +206,6 @@ class GameScene extends Phaser.Scene {
       start: 1, end: 5, zeroPad: 2, prefix: 'dead/'
     })
     this.anims.create({key: 'die', frames: deathFrames, frameRate: 5})
-
-  }
-
-  createPlatforms() {
 
   }
 
