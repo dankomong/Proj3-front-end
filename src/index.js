@@ -20,7 +20,6 @@ function getPlayerName() {
 
 getPlayerName();
 
-
 let bullets;
 let ship;
 let speed;
@@ -107,7 +106,7 @@ const config = {
       enableBody: true,
     }
   },
-  scene: [StartScene, GameScene, EndScene]
+  scene: [StartScene, GameScene]
 };
 
 const game = new Phaser.Game(config);

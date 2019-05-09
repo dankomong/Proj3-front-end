@@ -7,18 +7,15 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image('bg', './assets/space1.png');
-    // this.load.image('bg', './assets/bkgd_0.png');
     this.load.image('bg2', './assets/bkgd_1.png');
     this.load.image('bg3', './assets/bkgd_4.png');
-
-    //this.load.image('bullet', 'assets/sprites/purple_ball.png')
 
     this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
 		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
 		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
-    // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+
     this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
     this.load.multiatlas('alien', './assets/alien.json', 'assets');
 
@@ -26,8 +23,6 @@ class GameScene extends Phaser.Scene {
 
   create() {
     gameState.active = true;
-    // gameState.platforms = this.physics.add.group();
-    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -37,15 +32,13 @@ class GameScene extends Phaser.Scene {
     gameState.bg.setScale(1.25);
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
-    //var angle = Math.atan2(mouse y - sprite y, mouse x - sprite x ) * (180/Math.PI);
-    //console.log('ANGLE', angle)
 
     gameState.player.body.gravity.y = 800;
 
 
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
-    gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
-    gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
+    gameState.platform2 = this.physics.add.sprite( ((2 * config.width) / 3) + 150, 400, 'platform');
+    gameState.platform3 = this.physics.add.sprite(config.width + 300, 300, 'platform');
     gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
     gameState.platforms.forEach(platform => {
       platform.body.allowGravity = false;
@@ -104,6 +97,8 @@ class GameScene extends Phaser.Scene {
       loop: true,
     });
 
+
+    // this makes the platforms disappear instead of the bugs
     // this.physics.add.collider(bugs, gameState.platforms, function (bug) {
     //   bug.destroy()
     // })
@@ -120,30 +115,18 @@ class GameScene extends Phaser.Scene {
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
-        or
-        Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+        this.add.text(config.width / 2, (config.height / 2) - 100, 'Game Over', { fontSize: '15px', fill: '#b37329' });
+        this.add.text(config.width / 2, (config.height / 2) - 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
+        this.add.text(window.innerWidth / 2, (window.innerHeight / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
           gameState.lives = 3;
-          this.scene.restart();
-        })
-        this.input.keyboard.on('keydown-enter', () => {
-          gameState.score = 0;
-          gameState.lives = 3;
           getPlayerName();
           this.scene.restart();
-        }
-        )
+        })
       };
     });
-
-
-    // gameState.player.frame = 5
-
 
 
     //  Limited to 20 objects in the pool, not allowed to grow beyond it
@@ -213,9 +196,8 @@ class GameScene extends Phaser.Scene {
 
   update(time, delta) {
 
-    gameState.bg2.tilePositionX += 5;
-    gameState.bg3.tilePositionX += 10;
-    // gameState.platform1.x -= 1
+    gameState.bg2.tilePositionX += 6;
+    gameState.bg3.tilePositionX += 11;
 
     if (gameState.active) {
 
@@ -261,22 +243,14 @@ class GameScene extends Phaser.Scene {
             // this.physics.pause();
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
-            or
-            Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+            this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
               gameState.lives = 3;
-              this.scene.restart();
-            })
-            this.input.keyboard.on('keydown', () => {
-              gameState.score = 0;
-              gameState.lives = 3;
               getPlayerName();
               this.scene.restart();
-            }
-            )
+            })
           }
         });
       }
