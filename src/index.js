@@ -16,10 +16,26 @@ function getPlayerName() {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(player => {
+      gameState.playerId = player.id;
+    })
 }
 
 getPlayerName();
+
+function postScoreToDatabase() {
+  fetch('http://localhost:3000/scores', {
+      method: 'POST',
+      body: JSON.stringify({
+        score: gameState.score,
+        player_id: gameState.playerId
+      }),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+}
 
 let bullets;
 let ship;

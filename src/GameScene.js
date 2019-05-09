@@ -118,6 +118,7 @@ class GameScene extends Phaser.Scene {
         this.add.text(config.width / 2, (config.height / 2) - 100, 'Game Over', { fontSize: '15px', fill: '#b37329' });
         this.add.text(config.width / 2, (config.height / 2) - 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
         this.add.text(window.innerWidth / 2, (window.innerHeight / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+        postScoreToDatabase();
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
@@ -244,6 +245,7 @@ class GameScene extends Phaser.Scene {
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+            postScoreToDatabase()
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
