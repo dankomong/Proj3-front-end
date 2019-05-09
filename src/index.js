@@ -3,7 +3,9 @@ console.log('hello world')
 // img.src = './assets/alien.png'
 // document.querySelector('body').appendChild(img)
 
-const gameState = {};
+const gameState = {
+  score: 0
+};
 let bullets;
 let ship;
 let speed;
