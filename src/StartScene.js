@@ -20,7 +20,7 @@ class StartScene extends Phaser.Scene {
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
     gameState.bg.setScale(1.25);
 		this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Click to start!', { fontSize: '15px', fill: '#2996b3' });
-		console.log(this)
+
 		this.input.on('pointerdown', () => {
 			this.scene.stop('StarScene')
 			this.scene.start('GameScene')

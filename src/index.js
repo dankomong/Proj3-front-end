@@ -67,6 +67,7 @@ class GameScene extends Phaser.Scene {
     // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
     this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
     this.load.multiatlas('alien', './assets/alien.json', 'assets');
+
   }
 
   create() {
@@ -186,6 +187,8 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.overlap(bugs, bullets, function(bug) {
       bug.destroy();
+      gameState.score += 20;
+      console.log(gameState.score);
     })
 
     cursors = this.input.keyboard.createCursorKeys();
