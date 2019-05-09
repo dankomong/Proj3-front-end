@@ -9,17 +9,33 @@ const gameState = {
 
 function getPlayerName() {
   gameState.playerName = prompt("Please enter your name:", "");
-  // fetch('http://localhost:3000/players', {
-  //     method: 'POST',
-  //     body: JSON.stringify(data),
-  //     headers:{
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
+  fetch('http://localhost:3000/players', {
+      method: 'POST',
+      body: JSON.stringify({name: gameState.playerName}),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(player => {
+      gameState.playerId = player.id;
+    })
 }
 
 getPlayerName();
 
+function postScoreToDatabase() {
+  return fetch('http://localhost:3000/scores', {
+      method: 'POST',
+      body: JSON.stringify({
+        score: gameState.score,
+        player_id: gameState.playerId
+      }),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+}
 
 let bullets;
 let ship;
@@ -93,12 +109,12 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
+      // debug: true,
       //gravity: { y: 800 },
       enableBody: true,
     }
   },
-  scene: [StartScene, GameScene, EndScene]
+  scene: [StartScene, GameScene]
 };
 
 const game = new Phaser.Game(config);

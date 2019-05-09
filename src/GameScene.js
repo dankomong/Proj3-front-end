@@ -7,20 +7,19 @@ class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image('bg', './assets/space1.png');
-    // this.load.image('bg', './assets/bkgd_0.png');
     this.load.image('bg2', './assets/bkgd_1.png');
     this.load.image('bg3', './assets/bkgd_4.png');
-
-    //this.load.image('bullet', 'assets/sprites/purple_ball.png')
 
     this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
 		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
 		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
+
     this.load.image('face', './assets/alienface.png');
 
     // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+
     this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
     //this.load.spritesheet('enemy', 'http://www.feplanet.net/media/sprites/8/battle/sheets/enemy/monster_gorgon_magic.gif', 'assets');
 
@@ -40,8 +39,6 @@ class GameScene extends Phaser.Scene {
     gameState.bg.setScale(1.25);
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
-    //var angle = Math.atan2(mouse y - sprite y, mouse x - sprite x ) * (180/Math.PI);
-    //console.log('ANGLE', angle)
 
     // gameState.lives = 3;
     // let xCoord = 50;
@@ -56,8 +53,8 @@ class GameScene extends Phaser.Scene {
     //gameState.enemy = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
-    gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
-    gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
+    gameState.platform2 = this.physics.add.sprite( ((2 * config.width) / 3) + 150, 400, 'platform');
+    gameState.platform3 = this.physics.add.sprite(config.width + 300, 300, 'platform');
     gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
     gameState.platforms.forEach(platform => {
       platform.body.allowGravity = false;
@@ -117,6 +114,8 @@ class GameScene extends Phaser.Scene {
       loop: true,
     });
 
+
+    // this makes the platforms disappear instead of the bugs
     // this.physics.add.collider(bugs, gameState.platforms, function (bug) {
     //   bug.destroy()
     // })
@@ -138,36 +137,32 @@ class GameScene extends Phaser.Scene {
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else if (gameState.lives === 0) {
+      else  { //gameState.lives === 0)
+        console.log('dead')
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
         this.physics.pause();
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
-        or
-        Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+        this.add.text(config.width / 2, (config.height / 2) - 100, 'Game Over', { fontSize: '15px', fill: '#b37329' });
+        this.add.text(config.width / 2, (config.height / 2) - 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
+        this.add.text(config.width / 2, (config.height / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+        postScoreToDatabase().then(
+        fetch('http://localhost:3000/scores')
+    			.then(res => res.json())
+    			.then(scores => {console.log(scores);
+    				for(let i = 0; i < scores.length; i++) {
+    					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
+    				}
+    			}));
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
           gameState.lives = 3;
-          this.scene.restart();
-        })
-        this.input.keyboard.on('keydown-enter', () => {
-          gameState.score = 0;
-          gameState.lives = 3;
-
           getPlayerName();
           this.scene.restart();
-        }
-        )
+        })
       };
     });
-
-
-    // gameState.player.frame = 5
-
 
 
     //  Limited to 20 objects in the pool, not allowed to grow beyond it
@@ -237,9 +232,8 @@ class GameScene extends Phaser.Scene {
 
   update(time, delta) {
 
-    gameState.bg2.tilePositionX += 5;
-    gameState.bg3.tilePositionX += 10;
-    // gameState.platform1.x -= 1
+    gameState.bg2.tilePositionX += 6;
+    gameState.bg3.tilePositionX += 11;
 
     if (gameState.active) {
 
@@ -280,27 +274,21 @@ class GameScene extends Phaser.Scene {
             gameState.lives -= 1
             console.log(gameState.lives)
           }
-          else if (gameState.lives === 0) {
+          else  {
             gameState.active = false;
-            // this.physics.pause();
+            this.physics.pause();
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
-            or
-            Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+            this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+            postScoreToDatabase();
+            console.log('i fell!')
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
               gameState.lives = 3;
               this.scene.restart();
-            })
-            this.input.keyboard.on('keydown', () => {
-              gameState.score = 0;
-              gameState.lives = 3;
               getPlayerName();
-              this.scene.restart();
-            }
-            )
+            })
           }
         });
       }
