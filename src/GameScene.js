@@ -1,4 +1,3 @@
-
 class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
@@ -26,8 +25,6 @@ class GameScene extends Phaser.Scene {
 
   create() {
     gameState.active = true;
-    // gameState.platforms = this.physics.add.group();
-    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -37,6 +34,9 @@ class GameScene extends Phaser.Scene {
     gameState.bg.setScale(1.25);
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
+    //var angle = Math.atan2(mouse y - sprite y, mouse x - sprite x ) * (180/Math.PI);
+    //console.log('ANGLE', angle)
+
     gameState.player.body.gravity.y = 800;
 
 
@@ -85,7 +85,7 @@ class GameScene extends Phaser.Scene {
 
     // bugs
 
-    bugs = this.physics.add.group();
+    const bugs = this.physics.add.group();
 
     const bugList = ['bug1', 'bug2', 'bug3']
 
@@ -154,10 +154,15 @@ class GameScene extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    speed = Phaser.Math.GetSpeed(300, 1);
+    //speed = Phaser.Math.GetSpeed(300, 1);
 
 
   }
+
+  createPlatforms() {
+
+  }
+
 
   createAnimations() {
 
@@ -205,17 +210,18 @@ class GameScene extends Phaser.Scene {
 
   update(time, delta) {
 
-    gameState.bg2.tilePositionX += 5;
-    gameState.bg3.tilePositionX += 10;
-    // gameState.platform1.x -= 1
+    gameState.bg2.tilePositionX += 6;
+    gameState.bg3.tilePositionX += 11;
 
     if (gameState.active) {
 
       if (gameState.cursors.right.isDown) {
+        //gameState.tracking = false;
         gameState.player.flipX = false;
         gameState.player.setVelocityX(300);
       }
       else if (gameState.cursors.left.isDown) {
+        //gameState.tracking = true;
         gameState.player.flipX = true;
         gameState.player.setVelocityX(-200);
       }
@@ -247,8 +253,6 @@ class GameScene extends Phaser.Scene {
           else if (gameState.lives === 0) {
             gameState.active = false;
             this.physics.pause();
-            this.scene.stop('GameScene');
-      			this.scene.start('Highscore');
             // this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
             // this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
             // this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
@@ -256,21 +260,33 @@ class GameScene extends Phaser.Scene {
             this.input.on('pointerup', () => {
               gameState.score = 0;
               this.scene.restart();
-            });
-            // fetch POST request here
-            // fetch()
+            })
           }
         });
       }
 
       // BUTTON FOR SHOOTING
-      if (gameState.cursors.space.isDown && time > lastFired) {
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && time > lastFired) {
+
+        // if (gameState.cursors.left.isDown) {
+        //   console.log('player left', gameState.player)
+        //   gameState.tracking = true;
+        // }
+        // else if (gameState.cursors.right.isDown) {
+        //   console.log('player right', gameState.player)
+        //   gameState.tracking = false;
+        // }
         gameState.player.anims.play('fire', true);
           var bullet = bullets.get();
+          bullet.setActive(true);
+          bullet.setVisible(true);
 
            if (bullet){
-               bullet.fire(gameState.player.x, gameState.player.y);
-               lastFired = time + 50;
+             //console.log('bullet', bullet)
+              // let offset = new Phaser.Geom.Point(0, -gameState.player.height / 2 + 50);
+              // Phaser.Math.Rotate(offset, gameState.player.angle);
+              bullet.fire(gameState.player);
+              lastFired = time + 50;
            }
        }
 

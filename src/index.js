@@ -30,30 +30,61 @@ let lastFired = 0;
 
 var Bullet = new Phaser.Class({
 
-    Extends: Phaser.GameObjects.Image,
+    Extends: Phaser.GameObjects.Sprite,
 
     initialize:
 
     function Bullet (scene)
     {
-        Phaser.GameObjects.Image.call(this, scene, 0, 0, 'bullet');
+        Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'bullet');
 
-        this.speed = Phaser.Math.GetSpeed(400, 1);
+        this.speed = 0;
+        //console.log('this', this)
+        // Use velocity for movement
+        // Note that `velocity` is a built-in property
+        //   if you are using any of the physics engines
+        //   of Phaser
+        // this.velocity = new Phaser.Geom.Point(0, 0);
 
     },
 
-    fire: function (x, y)
+    fire: function (player)
     {
-        this.setPosition(x, y + 5)
-        this.setActive(true);
-        this.setVisible(true);
+        //this.setPosition(x, y + 5)
+        // this.setActive(true);
+        // this.setVisible(true);
+
+        this.setPosition(player.x, player.y);
+            console.log("playerflip", player.flipX)
+            if (player.flipX)
+            {
+                //  Facing left
+                this.speed = Phaser.Math.GetSpeed(-500, 1);
+            }
+            else
+            {
+                //  Facing right
+                this.speed = Phaser.Math.GetSpeed(500, 1);
+            }
+
+        // this.velocity.setTo(0, -this.speed)
+        // Phaser.Math.Rotate(this.velocity, direction)
     },
 
     update: function (time, delta)
     {
+        // Update position based on velocity
+        // if (gameState.tracking === false) {
+        //   this.x += this.speed * delta;
+        // }
+        // else if (gameState.tracking) {
+        //   this.x -= this.speed * delta;
+        // }
         this.x += this.speed * delta;
+        //this.y += this.velocity.y * delta;
+        // this.x -= this.speed * delta;
 
-        if (this.x > 820)
+        if (this.x > 1820)
         {
             this.setActive(false);
             this.setVisible(false);
@@ -71,7 +102,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      //debug: true,
+      debug: true,
       //gravity: { y: 800 },
       enableBody: true,
     }
