@@ -122,13 +122,7 @@ class GameScene extends Phaser.Scene {
         this.physics.pause();
         this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
         this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
-        this.input.on('pointerup', () => {
-          gameState.score = 0;
-          gameState.lives = 3;
-          this.scene.restart();
-        })
       };
     });
 
@@ -257,15 +251,24 @@ class GameScene extends Phaser.Scene {
           else if (gameState.lives === 0) {
             gameState.active = false;
             this.physics.pause();
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, `Press enter for a new player
+            or
+            Click to Restart`, { fontSize: '15px', fill: '#ffffff' });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
               gameState.lives = 3;
               this.scene.restart();
             })
+            this.input.keyboard.on('keydown', () => {
+              gameState.score = 0;
+              gameState.lives = 3;
+              getPlayerName();
+              this.scene.restart();
+            }
+            )
           }
         });
       }
