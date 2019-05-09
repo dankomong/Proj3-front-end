@@ -1,197 +1,277 @@
-class Level extends Phaser.Scene {
-  constructor(key) {
-    super({key});
-    this.levelKey = key
-    this.nextLevel = {
-      'Level1': 'Level2',
-      'Level2': 'Level3',
-      'Level3': 'Level4',
-    }
+
+class GameScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'GameScene' });
+    this.heights = [4, 7, 5, null, 5, 4, null, 4, 4]
   }
 
   preload() {
+    this.load.image('bg', './assets/space1.png');
+    // this.load.image('bg', './assets/bkgd_0.png');
+    this.load.image('bg2', './assets/bkgd_1.png');
+    this.load.image('bg3', './assets/bkgd_4.png');
+
+    //this.load.image('bullet', 'assets/sprites/purple_ball.png')
+
     this.load.image('bug1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_1.png');
-    this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
-    this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
+		this.load.image('bug2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_2.png');
+		this.load.image('bug3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/physics/bug_3.png');
 
     this.load.image('platform', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/platform.png');
-    this.load.image('snowflake', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/snowflake.png');
-    this.load.spritesheet('campfire', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/campfire.png',
-      { frameWidth: 32, frameHeight: 32});
-    this.load.spritesheet('codey', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/codey.png', { frameWidth: 72, frameHeight: 90})
+    // this.load.spritesheet('alien', './assets/alien.png', {frameWidth: 83, frameHeight: 116});
+    this.load.spritesheet('bullet', './assets/rgblaser.png', {frameWidth: 4, frameHeight: 4});
+    this.load.multiatlas('alien', './assets/alien.json', 'assets');
 
-    this.load.image('bg1', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/mountain.png');
-    this.load.image('bg2', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/trees.png');
-    this.load.image('bg3', 'https://s3.amazonaws.com/codecademy-content/courses/learn-phaser/Codey+Tundra/snowdunes.png');
   }
 
   create() {
-    gameState.active = true
-
-    this.createParallaxBackgrounds();
-
-    gameState.player = this.physics.add.sprite(125, 110, 'codey').setScale(.5);
-
-    gameState.platforms = this.physics.add.staticGroup();
-
-    this.createAnimations();
-    this.levelSetup();
-
-    this.cameras.main.setBounds(0, 0, gameState.bg3.width, gameState.bg3.height);
-    this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
-
-    this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
-    gameState.player.setCollideWorldBounds(true);
-
-    this.physics.add.collider(gameState.player, gameState.platforms);
-    this.physics.add.collider(gameState.goal, gameState.platforms);
+    gameState.active = true;
+    // gameState.platforms = this.physics.add.group();
+    // gameState.platforms.setAll('body.allowGravity', false);
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
-  }
 
-  createPlatform(xIndex, yIndex) {
-    // Creates a platform evenly spaced along the two indices.
-    // If either is not a number it won't make a platform
-      if (typeof yIndex === 'number' && typeof xIndex === 'number') {
-        gameState.platforms.create((220 * xIndex),  yIndex * 70, 'platform').setOrigin(0, 0.5).refreshBody();
+    gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
+    gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
+    gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
+    gameState.bg.setScale(1.25);
+
+    gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
+    gameState.player.body.gravity.y = 800;
+
+
+    this.createPlatforms();
+    gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
+    gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
+    gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
+    gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
+    gameState.platforms.forEach(platform => {
+      platform.body.allowGravity = false;
+      platform.body.immovable = true;
+      platform.setVelocityX(-100);
+
+      this.physics.add.collider(gameState.player, platform);
+    })
+    const platformGen = () => {
+      const yCoord = Math.random() * (window.innerHeight - 200) + 150;
+      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 300, yCoord, 'platform')
+      randomPlatform.body.allowGravity = false;
+      randomPlatform.body.immovable = true;
+      randomPlatform.setVelocityX(-100);
+      this.physics.add.collider(gameState.player, randomPlatform);
+    }
+
+    const platformGenLoop = this.time.addEvent({
+      delay: 3000,
+      callback: platformGen,
+      callbackScope: this,
+      loop: true,
+    });
+
+    this.createAnimations();
+
+
+    gameState.player.setCollideWorldBounds(true);
+    gameState.player.setSize(62, 105, true);
+    gameState.player.setOffset(-10, 0);
+
+    this.cameras.main.setBounds(0, 0, gameState.bg.width, gameState.bg.height);
+    this.physics.world.setBounds(0, 0, gameState.width, gameState.bg3.height + gameState.player.height);
+
+
+    this.cameras.main.startFollow(gameState.player, true, 0.5, 0.5)
+
+
+
+    // bugs
+
+    const bugs = this.physics.add.group();
+
+    const bugList = ['bug1', 'bug2', 'bug3']
+
+    const bugGen = () => {
+      const xCoord = Math.random() * window.innerWidth * 2
+      let randomBug = bugList[Math.floor(Math.random() * 3)]
+      bugs.create(xCoord, 10, randomBug).body.gravity.y = 800;
+    }
+
+    const bugGenLoop = this.time.addEvent({
+      delay: 400,
+      callback: bugGen,
+      callbackScope: this,
+      loop: true,
+    });
+
+    // this.physics.add.collider(bugs, gameState.platforms, function (bug) {
+    //   bug.destroy()
+    // })
+
+    this.physics.add.collider(gameState.player, bugs, () => {
+      gameState.player.play('die', true);
+      if (gameState.lives > 0) {
+        gameState.lives -= 1
+        console.log(gameState.lives)
+        this.scene.restart();
       }
+      else {
+        gameState.active = false;
+        bugGenLoop.destroy();
+        platformGenLoop.destroy();
+        this.physics.pause();
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+        this.input.on('pointerup', () => {
+          gameState.score = 0;
+          this.scene.restart();
+        })
+      };
+    });
+
+
+    // gameState.player.frame = 5
+
+
+
+    //  Limited to 20 objects in the pool, not allowed to grow beyond it
+    // bullets = this.pool.createObjectPool(Bullet, 20);
+
+    bullets = this.physics.add.group({
+        classType: Bullet,
+        maxSize: 40,
+        runChildUpdate: true
+    });
+
+    //  Create the objects in advance, so they're ready and waiting in the pool
+    bullets.create(20);
+
+    this.physics.add.overlap(bugs, bullets, function(bug) {
+      bug.destroy();
+      gameState.score += 20;
+      console.log(gameState.score);
+    })
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+    speed = Phaser.Math.GetSpeed(300, 1);
+
+
   }
 
   createAnimations() {
+
     // attack
     const attackFrames = this.anims.generateFrameNames('alien', {
-      start: 1, end: 4, zeroPad: 2,
-      prefix: 'attack/'
-      });
-    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5
-    });
-  }
+                        start: 1, end: 4, zeroPad: 2,
+                        prefix: 'attack/'
+                    });
+    this.anims.create({ key: 'attack', frames: attackFrames, frameRate: 10, repeat: 5 });
+    // attack option 2 --> 'draw' 'fire'
+    const drawFrames = this.anims.generateFrameNames('alien', {
+                        start: 1, end: 5, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'draw', frames: drawFrames, frameRate: 10, repeat: 0});
 
-  createParallaxBackgrounds() {
-    gameState.bg1 = this.add.image(0, 0, 'bg1');
-    gameState.bg2 = this.add.image(0, 0, 'bg2');
-    gameState.bg3 = this.add.image(0, 0, 'bg3');
+    const fireFrames = this.anims.generateFrameNames('alien', {
+                        start: 6, end: 11, zeroPad: 2,
+                        prefix: 'fire/'
+                    });
+    this.anims.create({ key: 'fire', frames: fireFrames, frameRate: 10, repeat: -1 });
 
-    gameState.bg1.setOrigin(0, 0);
-    gameState.bg2.setOrigin(0, 0);
-    gameState.bg3.setOrigin(0, 0);
-
-    const game_width = parseFloat(gameState.bg3.getBounds().width)
-    gameState.width = game_width;
-    const window_width = config.width
-
-    const bg1_width = gameState.bg1.getBounds().width
-    const bg2_width = gameState.bg2.getBounds().width
-    const bg3_width = gameState.bg3.getBounds().width
-
-    // Set the scroll factor for bg1, bg2, and bg3 here!
-    gameState.bg1.setScrollFactor((bg1_width - window_width) / (game_width - window_width));
-    gameState.bg2.setScrollFactor((bg2_width - window_width) / (game_width - window_width));
-  }
-
-  levelSetup() {
-    for (const [xIndex, yIndex] of this.heights.entries()) {
-      this.createPlatform(xIndex, yIndex);
-    }
-
-    // Create the campfire at the end of the level
-    gameState.goal = this.physics.add.sprite(gameState.width - 40, 100, 'campfire');
-
-    this.physics.add.overlap(gameState.player, gameState.goal, function() {
-      this.cameras.main.fade(800, 0, 0, 0, false, function(camera, progress) {
-        if (progress > .9) {
-          this.scene.stop(this.levelKey);
-          this.scene.start(this.nextLevel[this.levelKey]);
-        }
-      });
-    }, null, this);
+    // walk
+    const walkFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 6, zeroPad: 2, prefix: 'walk/'
+    })
+    this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
+    // jump
+    const jumpFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 4, zeroPad: 2, prefix: 'jump/'
+    })
+    this.anims.create({key: 'jump', frames: jumpFrames, frameRate: 10 })
+    // die
+    const deathFrames = this.anims.generateFrameNames('alien', {
+      start: 1, end: 5, zeroPad: 2, prefix: 'dead/'
+    })
+    this.anims.create({key: 'die', frames: deathFrames, frameRate: 5})
 
   }
 
-  update() {
-    if(gameState.active){
-      gameState.goal.anims.play('fire', true);
+  createPlatforms() {
+
+  }
+
+
+  update(time, delta) {
+
+    gameState.bg2.tilePositionX += 5;
+    gameState.bg3.tilePositionX += 10;
+    // gameState.platform1.x -= 1
+
+    if (gameState.active) {
+
       if (gameState.cursors.right.isDown) {
         gameState.player.flipX = false;
-        gameState.player.setVelocityX(gameState.speed);
-        gameState.player.anims.play('run', true);
-      } else if (gameState.cursors.left.isDown) {
+        gameState.player.setVelocityX(300);
+      }
+      else if (gameState.cursors.left.isDown) {
         gameState.player.flipX = true;
-        gameState.player.setVelocityX(-gameState.speed);
-        gameState.player.anims.play('run', true);
-      } else {
+        gameState.player.setVelocityX(-200);
+      }
+      else {
+        gameState.player.anims.play('walk', true)
         gameState.player.setVelocityX(0);
-        gameState.player.anims.play('idle', true);
       }
 
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && gameState.player.body.touching.down) {
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
+        // gameState.player.setVelocity(250);
+        gameState.player.setVelocityY(-600);
         gameState.player.anims.play('jump', true);
-        gameState.player.setVelocityY(-500);
       }
+
 
       if (!gameState.player.body.touching.down){
-        gameState.player.anims.play('jump', true);
-      }
+        // gameState.player.anims.play('jump', true);
+      };
 
-      if (gameState.player.y > gameState.bg3.height) {
+
+      if (gameState.player.y > gameState.bg3.height - 1300) {
+        gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9) {
+          if (progress > .9 && gameState.lives > 0) {
             this.scene.restart(this.levelKey);
+            gameState.lives -= 1
+            console.log(gameState.lives)
+          }
+          else if (gameState.lives === 0) {
+            gameState.active = false;
+            this.physics.pause();
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+            this.input.on('pointerup', () => {
+              gameState.score = 0;
+              this.scene.restart();
+            });
+            // fetch POST request here
+            // fetch()
           }
         });
       }
-    }
-  }
-}
 
-class Level1 extends Level {
-  constructor() {
-    super('Level1')
-    this.heights = [4, 7, 5, null, 5, 4, null, 4, 4];
-  }
-}
+      // BUTTON FOR SHOOTING
+      if (gameState.cursors.space.isDown && time > lastFired) {
+        gameState.player.anims.play('fire', true);
+          var bullet = bullets.get();
 
-class Level2 extends Level {
-  constructor() {
-    super('Level2')
-    this.heights = [5, 4, null, 4, 6, 4, 6, 5, 5];
-  }
-}
-
-class Level3 extends Level {
-  constructor() {
-    super('Level3')
-    this.heights = [6, null, 6, 4, 6, 4, 5, null, 4];
-  }
-}
-
-class Level4 extends Level {
-  constructor() {
-    super('Level4')
-    this.heights = [4, null, 3, 6, null, 6, null, 5, 4];
-  }
-}
-
-const gameState = {
-  speed: 240,
-  ups: 380,
-};
-
-const config = {
-  type: Phaser.CANVAS,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  fps: {target: 60},
-  backgroundColor: "b9baff",
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { x: 200 },
-      enableBody: true,
+           if (bullet){
+               bullet.fire(gameState.player.x, gameState.player.y);
+               lastFired = time + 50;
+           }
+       }
 
     }
-  },
-  scene: [Level1, Level2, Level3, Level4]
-};
-
-const game = new Phaser.Game(config);
+  }
+}
