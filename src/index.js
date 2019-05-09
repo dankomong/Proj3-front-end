@@ -5,7 +5,11 @@ console.log('hello world')
 
 const gameState = {
   score: 0,
+<<<<<<< HEAD
   //tracking: false
+=======
+  lives: 3
+>>>>>>> 35005739594f95f7f93cf3e48de67a1a155696cf
 };
 let bullets;
 let ship;
@@ -191,17 +195,25 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
-      gameState.active = false;
-      bugGenLoop.destroy();
-      platformGenLoop.destroy();
-      this.physics.pause();
-      this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-      this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
-
-      this.input.on('pointerup', () => {
-        gameState.score = 0;
+      if (gameState.lives > 0) {
+        gameState.lives -= 1
+        console.log(gameState.lives)
         this.scene.restart();
-      });
+      }
+      else {
+        gameState.active = false;
+        bugGenLoop.destroy();
+        platformGenLoop.destroy();
+        this.physics.pause();
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+        this.input.on('pointerup', () => {
+          gameState.score = 0;
+          this.scene.restart();
+        })
+      };
     });
 
 
@@ -321,8 +333,22 @@ class GameScene extends Phaser.Scene {
       if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (progress > .9) {
+          if (progress > .9 && gameState.lives > 0) {
             this.scene.restart(this.levelKey);
+            gameState.lives -= 1
+            console.log(gameState.lives)
+          }
+          else if (gameState.lives === 0) {
+            gameState.active = false;
+            this.physics.pause();
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+
+            this.input.on('pointerup', () => {
+              gameState.score = 0;
+              this.scene.restart();
+            })
           }
         });
       }
