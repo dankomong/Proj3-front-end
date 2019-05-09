@@ -2,6 +2,7 @@ class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
     this.heights = [4, 7, 5, null, 5, 4, null, 4, 4]
+    this.jump = 0;
   }
 
   preload() {
@@ -233,14 +234,16 @@ class GameScene extends Phaser.Scene {
         gameState.player.setVelocityX(0);
       }
 
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && this.jump > 0) {
+        this.jump--;
         // gameState.player.setVelocity(250);
         gameState.player.setVelocityY(-600);
         gameState.player.anims.play('jump', true);
       }
 
 
-      if (!gameState.player.body.touching.down){
+      if (gameState.player.body.touching.down){
+        this.jump = 1;
         // gameState.player.anims.play('jump', true);
       };
 
