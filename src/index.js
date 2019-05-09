@@ -5,13 +5,11 @@ console.log('hello world')
 
 const gameState = {
   score: 0,
-<<<<<<< HEAD
   //tracking: false
-=======
   lives: 3
->>>>>>> 35005739594f95f7f93cf3e48de67a1a155696cf
 };
 let bullets;
+let jump = 0;
 let ship;
 let speed;
 let stats;
@@ -45,7 +43,7 @@ var Bullet = new Phaser.Class({
         // this.setVisible(true);
 
         this.setPosition(player.x, player.y);
-            console.log("playerflip", player.flipX)
+            //console.log("playerflip", player.flipX)
             if (player.flipX)
             {
                 //  Facing left
@@ -318,15 +316,18 @@ class GameScene extends Phaser.Scene {
         gameState.player.setVelocityX(0);
       }
 
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && gameState.player.body.touching.down) {
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.up) && jump > 0) {
         // gameState.player.setVelocity(250);
+        jump--;
         gameState.player.setVelocityY(-600);
         gameState.player.anims.play('jump', true);
       }
 
 
-      if (!gameState.player.body.touching.down){
+      if (gameState.player.body.touching.down){
         // gameState.player.anims.play('jump', true);
+        // double jump
+        jump = 1;
       };
 
 
