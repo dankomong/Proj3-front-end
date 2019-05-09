@@ -40,7 +40,6 @@ class GameScene extends Phaser.Scene {
     gameState.player.body.gravity.y = 800;
 
 
-    this.createPlatforms();
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( (2 * config.width) / 3, 400, 'platform');
     gameState.platform3 = this.physics.add.sprite(config.width, 300, 'platform');
@@ -119,15 +118,15 @@ class GameScene extends Phaser.Scene {
         platformGenLoop.destroy();
         this.physics.pause();
         this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 75, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 150, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+        this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
+          gameState.lives = 3;
           this.scene.restart();
-        })
-      };
-    });
+          })
+        }});
 
 
     // gameState.player.frame = 5
@@ -158,11 +157,6 @@ class GameScene extends Phaser.Scene {
 
 
   }
-
-  createPlatforms() {
-
-  }
-
 
   createAnimations() {
 
@@ -203,9 +197,6 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  createPlatforms() {
-
-  }
 
 
   update(time, delta) {
@@ -253,21 +244,22 @@ class GameScene extends Phaser.Scene {
           else if (gameState.lives === 0) {
             gameState.active = false;
             this.physics.pause();
-            // this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
-            // this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
-            // this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, 'Game Over', { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#ffffff' });
+            this.add.text(window.innerWidth / 2, window.innerHeight / 2 + 50, 'Click to Restart', { fontSize: '15px', fill: '#ffffff' });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
+              gameState.lives = 3;
               this.scene.restart();
             })
-          }
-        });
-      }
+
+        };
+      })
 
       // BUTTON FOR SHOOTING
-      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) && time > lastFired) {
-
+      if (Phaser.Input.Keyboard.JustDown(gameState.cursors.space) ) { //&& time > lastFired
+        console.log('working?')
         // if (gameState.cursors.left.isDown) {
         //   console.log('player left', gameState.player)
         //   gameState.tracking = true;
@@ -292,4 +284,4 @@ class GameScene extends Phaser.Scene {
 
     }
   }
-}
+}}

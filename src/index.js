@@ -9,13 +9,13 @@ const gameState = {
 
 function getPlayerName() {
   gameState.playerName = prompt("Please enter your name:", "");
-  fetch('http://localhost:3000/players', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
+  // fetch('http://localhost:3000/players', {
+  //     method: 'POST',
+  //     body: JSON.stringify(data),
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
 }
 
 getPlayerName();
