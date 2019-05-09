@@ -37,6 +37,15 @@ class StartScene extends Phaser.Scene {
 			Hey, ${gameState.playerName}
 			Click to start`, { fontSize: '30px', fill: '#b37329' });
 
+		fetch('http://localhost:3000/scores')
+			.then(res => res.json())
+			.then(scores => {console.log(scores);
+				for(let i = 0; i < scores.length; i++) {
+					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
+				}
+			})
+
+
 
 		this.input.on('pointerdown', () => {
 			gameState.score = 0;
