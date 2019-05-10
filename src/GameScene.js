@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
 
   create() {
     gameState.active = true;
+    // getPlayerName();
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
 
@@ -40,21 +41,13 @@ class GameScene extends Phaser.Scene {
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
-    // gameState.lives = 3;
-    // let xCoord = 50;
-    // for (let i = 0; i < gameState.lives; i++) {
-    //     gameState.face = this.add.tileSprite(xCoord, 700, 0, 0, 'face')
-    //     xCoord += 60;
-    // }
-
-
     gameState.player.body.gravity.y = 800;
 
     //gameState.enemy = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
     gameState.platform2 = this.physics.add.sprite( ((2 * config.width) / 3) + 75, 400, 'platform');
-    gameState.platform3 = this.physics.add.sprite(config.width + 300, 300, 'platform');
+    gameState.platform3 = this.physics.add.sprite(config.width + 100, 300, 'platform');
     gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
     gameState.platforms.forEach(platform => {
       platform.body.allowGravity = false;
@@ -67,11 +60,13 @@ class GameScene extends Phaser.Scene {
     let yCoord = 0;
     const platformGen = () => {
       yCoord = Math.random() * (window.innerHeight - 200) + 150;
-      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 300, yCoord, 'platform')
+      let randomPlatform = this.physics.add.sprite(gameState.bg.width + 400, yCoord, 'platform')
       randomPlatform.body.allowGravity = false;
       randomPlatform.body.immovable = true;
       randomPlatform.setVelocityX(-100);
       this.physics.add.collider(gameState.player, randomPlatform);
+      gameState.score += 10
+      console.log(gameState.score)
     }
 
     const platformGenLoop = this.time.addEvent({
@@ -127,18 +122,17 @@ class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(gameState.player, bugs, () => {
       gameState.player.play('die', true);
-      if (gameState.lives > 0) {
-        gameState.lives -= 1
+      gameState.lives -= 1;
+      if (gameState.lives >= 0) {
+        console.log(gameState.lives)
         let xCoord = 50;
         for (let i = 0; i < gameState.lives; i++) {
             this.add.tileSprite(xCoord, 700, 0, 0, 'face')
             xCoord += 60;
         }
-        console.log(gameState.lives)
         this.scene.restart();
       }
       else { //gameState.lives === 0)
-        console.log('dead')
         gameState.active = false;
         bugGenLoop.destroy();
         platformGenLoop.destroy();
@@ -158,8 +152,10 @@ class GameScene extends Phaser.Scene {
         this.input.on('pointerup', () => {
           gameState.score = 0;
           gameState.lives = 3;
-          getPlayerName();
           this.scene.restart();
+          getPlayerName();
+          // this.scene.stop(GameScene);
+          // this.scene.start(StartScene);
         })
       };
     });
@@ -270,9 +266,8 @@ class GameScene extends Phaser.Scene {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
           // if (gameState.lives > 0) { //progress > .9 &&
-            this.scene.restart(this.levelKey);
-            gameState.lives -= 1
-            console.log(gameState.lives)
+            this.scene.restart();
+            // gameState.lives -= 1
           // }
           // else {
           //   gameState.active = false;

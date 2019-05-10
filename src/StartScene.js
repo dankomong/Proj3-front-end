@@ -24,6 +24,7 @@ class StartScene extends Phaser.Scene {
 
 		// this.add.image(config.width / 2, config.height / 2, 'still')
 
+
 		gameState.player = this.add.sprite(config.width / 3, config.height / 2, 'alien', 'idle/01').setScale(.8);
 
 			const walkFrames = this.anims.generateFrameNames('alien', {
@@ -32,6 +33,7 @@ class StartScene extends Phaser.Scene {
     	this.anims.create({key: 'walk', frames: walkFrames, frameRate: 10, repeat: -1 })
 
 		gameState.player.anims.play('walk')
+		getPlayerName();
 
 		this.add.text((config.width / 2) - 60, (config.height / 2) - 60, `
 			Hey, ${gameState.playerName}
@@ -49,6 +51,7 @@ class StartScene extends Phaser.Scene {
 
 		this.input.on('pointerdown', () => {
 			gameState.score = 0;
+			gameState.lives = 3;
 			this.scene.stop('StartScene')
 			this.scene.start('GameScene')
 		})

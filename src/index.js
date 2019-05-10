@@ -22,7 +22,7 @@ function getPlayerName() {
     })
 }
 
-getPlayerName();
+// getPlayerName();
 
 function postScoreToDatabase() {
   return fetch('http://localhost:3000/scores', {
