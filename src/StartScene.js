@@ -20,7 +20,7 @@ class StartScene extends Phaser.Scene {
 		gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
-    gameState.bg.setScale(1.25);
+    gameState.bg.setScale(2);
 
 		// this.add.image(config.width / 2, config.height / 2, 'still')
 

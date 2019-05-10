@@ -36,7 +36,7 @@ class GameScene extends Phaser.Scene {
     gameState.bg = this.add.tileSprite(0, 0, 0, 0, 'bg').setOrigin(0, 0);
     gameState.bg2 = this.add.tileSprite(0, 0, 0, 0, 'bg2').setOrigin(0, 0);
     gameState.bg3 = this.add.tileSprite(0, 0, 0, 0, 'bg3').setOrigin(0, -100);
-    gameState.bg.setScale(1.25);
+    gameState.bg.setScale(2);
 
     gameState.player = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
@@ -53,7 +53,7 @@ class GameScene extends Phaser.Scene {
     //gameState.enemy = this.physics.add.sprite(config.width / 4, 0, 'alien', 'idle/01').setScale(.8);
 
     gameState.platform1 = this.physics.add.sprite(config.width / 3, 500, 'platform');
-    gameState.platform2 = this.physics.add.sprite( ((2 * config.width) / 3) + 150, 400, 'platform');
+    gameState.platform2 = this.physics.add.sprite( ((2 * config.width) / 3) + 75, 400, 'platform');
     gameState.platform3 = this.physics.add.sprite(config.width + 300, 300, 'platform');
     gameState.platforms = [gameState.platform1, gameState.platform2, gameState.platform3]
     gameState.platforms.forEach(platform => {
@@ -266,38 +266,38 @@ class GameScene extends Phaser.Scene {
       };
 
 
-      if (gameState.player.y > gameState.bg3.height - 1300) {
+      if (gameState.player.y > gameState.bg3.height - 1200) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (gameState.lives > 0) { //progress > .9 &&
+          // if (gameState.lives > 0) { //progress > .9 &&
             this.scene.restart(this.levelKey);
             gameState.lives -= 1
             console.log(gameState.lives)
-          }
-          else {
-            gameState.active = false;
-            this.physics.pause();
-            this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
-            this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
-            this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
-            console.log('i fell!')
-            postScoreToDatabase().then(() => {
-            fetch('http://localhost:3000/scores')
-        			.then(res => res.json())
-        			.then(scores => {console.log(scores);
-        				for(let i = 0; i < scores.length; i++) {
-        					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
-        				}
-        			})
-            });
-
-            this.input.on('pointerup', () => {
-              gameState.score = 0;
-              gameState.lives = 3;
-              this.scene.restart();
-              getPlayerName();
-            })
-          }
+          // }
+          // else {
+          //   gameState.active = false;
+          //   this.physics.pause();
+          //   this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
+          //   this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
+          //   this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
+          //   console.log('i fell!')
+          //   postScoreToDatabase().then(() => {
+          //   fetch('http://localhost:3000/scores')
+        	// 		.then(res => res.json())
+        	// 		.then(scores => {console.log(scores);
+        	// 			for(let i = 0; i < scores.length; i++) {
+        	// 				this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
+        	// 			}
+        	// 		})
+          //   });
+          //
+          //   this.input.on('pointerup', () => {
+          //     gameState.score = 0;
+          //     gameState.lives = 3;
+          //     this.scene.restart();
+          //     getPlayerName();
+          //   })
+          // }
         });
       }
 
