@@ -137,7 +137,7 @@ class GameScene extends Phaser.Scene {
         console.log(gameState.lives)
         this.scene.restart();
       }
-      else if (gameState.lives === 0)  { //gameState.lives === 0)
+      else { //gameState.lives === 0)
         console.log('dead')
         gameState.active = false;
         bugGenLoop.destroy();
@@ -269,12 +269,12 @@ class GameScene extends Phaser.Scene {
       if (gameState.player.y > gameState.bg3.height - 1300) {
         gameState.player.anims.play('die', true);
         this.cameras.main.shake(240, .01, false, function(camera, progress) {
-          if (gameState.lives > 0) { //progress > .9 && 
+          if (gameState.lives > 0) { //progress > .9 &&
             this.scene.restart(this.levelKey);
             gameState.lives -= 1
             console.log(gameState.lives)
           }
-          else if (gameState.lives === 0) {
+          else {
             gameState.active = false;
             this.physics.pause();
             this.add.text(config.width / 2, config.height / 2, 'Game Over', { fontSize: '15px', fill: '#b37329' });
