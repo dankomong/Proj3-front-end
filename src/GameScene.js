@@ -146,14 +146,14 @@ class GameScene extends Phaser.Scene {
         this.add.text(config.width / 2, (config.height / 2) - 100, 'Game Over', { fontSize: '15px', fill: '#b37329' });
         this.add.text(config.width / 2, (config.height / 2) - 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
         this.add.text(config.width / 2, (config.height / 2), `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
-        postScoreToDatabase().then(
+        postScoreToDatabase().then(() => {
         fetch('http://localhost:3000/scores')
     			.then(res => res.json())
     			.then(scores => {console.log(scores);
     				for(let i = 0; i < scores.length; i++) {
     					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
     				}
-    			}));
+    			})});
 
         this.input.on('pointerup', () => {
           gameState.score = 0;
@@ -281,14 +281,15 @@ class GameScene extends Phaser.Scene {
             this.add.text(config.width / 2, config.height / 2 + 50, `Your score is ${gameState.score}`, { fontSize: '15px', fill: '#b37329' });
             this.add.text(config.width / 2, config.height / 2 + 150, `Click to Restart`, { fontSize: '15px', fill: '#b37329' });
             console.log('i fell!')
-            postScoreToDatabase().then(
+            postScoreToDatabase().then(() => {
             fetch('http://localhost:3000/scores')
         			.then(res => res.json())
         			.then(scores => {console.log(scores);
         				for(let i = 0; i < scores.length; i++) {
         					this.add.text((config.width / 2) - 30, (config.height / 2) + 60 + (15*i), `${i+1}. ${scores[i].player.name}   ${scores[i].score}`)
         				}
-        			}));
+        			})
+            });
 
             this.input.on('pointerup', () => {
               gameState.score = 0;
